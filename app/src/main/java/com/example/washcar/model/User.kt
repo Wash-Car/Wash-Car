@@ -5,4 +5,6 @@ data class User(
     var password: String,
     var name : String?
 
-)
+){
+    constructor() :this("", "", "")
+}

@@ -3,6 +3,9 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/Bolsista/AndroidStudioProjects/Wash-Car/app/src/main/res/layout/activity_main.xml" value="0.358695652173913" />
+        <entry key="..\:/Users/Bolsista/AndroidStudioProjects/Wash-Car/app/src/main/res/layout/fragment_blank.xml" value="0.358695652173913" />
+        <entry key="..\:/Users/Bolsista/AndroidStudioProjects/Wash-Car/app/src/main/res/layout/fragment_login.xml" value="0.358695652173913" />
         <entry key="..\:/Users/filip/AndroidStudioProjects/WashCar/app/src/main/res/layout/activity_main.xml" value="0.25" />
         <entry key="..\:/Users/filip/AndroidStudioProjects/WashCar/app/src/main/res/layout/fragment_blank.xml" value="0.209375" />
         <entry key="..\:/Users/filip/AndroidStudioProjects/WashCar/app/src/main/res/layout/fragment_login.xml" value="0.25" />

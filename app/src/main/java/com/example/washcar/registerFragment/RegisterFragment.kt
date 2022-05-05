@@ -11,6 +11,7 @@ import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.example.washcar.R
+import com.example.washcar.WashCarApplication
 import com.example.washcar.databinding.FragmentRegisterBinding
 
 
@@ -24,16 +25,35 @@ class RegisterFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+
+
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_register,container, false)
-        viewModel = ViewModelProvider(this).get(RegisterViewModel::class.java)
-        // Inflate the layout for this fragment
 
 
-            viewModel.user.observe(viewLifecycleOwner, Observer {
-                Toast.makeText(requireContext(), it.email, Toast.LENGTH_SHORT).show()
-                Log.i("user", "$it")
-            })
 
+        val factory = RegisterViewModel.Factory((requireActivity().application as WashCarApplication).remoteRepository)
+
+        viewModel = ViewModelProvider(this, factory).get(RegisterViewModel::class.java)
+        binding.viewmodel = viewModel
+        binding.lifecycleOwner = viewLifecycleOwner
+
+
+
+
+
+//
+//        binding.button.setOnClickListener {
+//            viewModel.createUser(viewModel.user)
+//
+//        }
+
+//        viewModel.responseCreateUser.observe(viewLifecycleOwner, Observer {
+//           if (it.isSuccessful){
+//               Log.i("response", "${it.body()}")
+//               Log.i("response", "${it.code()}")
+//               Log.i("response", "${it.message()}")
+//           }
+//        })
 
         return binding.root
     }
