@@ -1,17 +1,18 @@
 package com.example.washcar.repository
 
-import androidx.lifecycle.MutableLiveData
 import com.example.washcar.api.RetrofitInstance
-import com.example.washcar.model.User
-import okhttp3.Call
-import okhttp3.ResponseBody
+import com.example.washcar.api.user.model.UserRequest
+import com.example.washcar.api.user.model.UserResponse
+import retrofit2.Call
 import retrofit2.Response
 
 
 class RemoteRepository {
-//     fun createUser(user: User):  User {
-//       return RetrofitInstance.userApi.createUser(user)
-//     }
+    suspend fun createUser(userRequest: UserRequest): Response<UserResponse> {
+//
+//
+            return  RetrofitInstance.userApi.createUser(userRequest)
+        }
 
 
 }
