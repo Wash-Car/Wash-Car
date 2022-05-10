@@ -5,8 +5,10 @@ import com.example.washcar.api.user.model.UserRequest
 import com.example.washcar.api.user.model.UserResponse
 import com.example.washcar.model.User
 import com.example.washcar.repository.RemoteRepository
+import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 import retrofit2.Response
+
 
 class RegisterViewModel(remoteRepository: RemoteRepository) : ViewModel() {
 
