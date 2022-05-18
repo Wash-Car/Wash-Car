@@ -1,13 +1,20 @@
 package com.example.washcar.ui.login
 
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import android.util.Patterns
+import androidx.lifecycle.viewModelScope
 import com.example.washcar.data.LoginRepository
-import com.example.washcar.data.Result
 
 import com.example.washcar.R
+import com.example.washcar.api.auth.model.LoginRequest
+import com.example.washcar.api.auth.model.LoginResponse
+import kotlinx.coroutines.launch
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 
 class LoginViewModel(private val loginRepository: LoginRepository) : ViewModel() {
 
@@ -17,16 +24,49 @@ class LoginViewModel(private val loginRepository: LoginRepository) : ViewModel()
     private val _loginResult = MutableLiveData<LoginResult>()
     val loginResult: LiveData<LoginResult> = _loginResult
 
-    fun login(username: String, password: String) {
-        // can be launched in a separate asynchronous job
-        val result = loginRepository.login(username, password)
+    private val _loginStatus = MutableLiveData<Boolean>()
+    val loginStatus: LiveData<Boolean> = _loginStatus
 
-        if (result is Result.Success) {
-            _loginResult.value =
-                LoginResult(success = LoggedInUserView(displayName = result.data.displayName))
-        } else {
-            _loginResult.value = LoginResult(error = R.string.login_failed)
-        }
+    fun setStatusFalse(){
+        _loginStatus.value = false
+    }
+
+    fun login(email: String, password: String)  {
+       viewModelScope.launch {
+
+           val login = LoginRequest(email,password)
+           val response = loginRepository.login(login)
+           response.enqueue(object : Callback<LoginResponse>{
+
+               override fun onResponse(
+                   call: Call<LoginResponse>,
+                   response: Response<LoginResponse>
+               ) {
+                   if (response.code() == 200){
+                       _loginStatus.value = true
+                       //Log.i("responsee", "${response.body()}")
+                       _loginResult.value =
+                           LoginResult(success = response.body())
+
+                   }else if(response.code() == 401){
+                       _loginStatus.value = false
+                       _loginResult.value = LoginResult(error = "Email e/ou senha incorretos")
+
+                   }
+
+               }
+
+
+               override fun onFailure(call: Call<LoginResponse>, t: Throwable) {
+
+               }
+
+           })
+
+
+
+       }
+
     }
 
     fun loginDataChanged(username: String, password: String) {

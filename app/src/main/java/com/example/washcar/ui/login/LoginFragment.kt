@@ -9,17 +9,15 @@ import android.view.View
 import android.view.ViewGroup
 import android.view.inputmethod.EditorInfo
 import android.widget.Toast
-import androidx.annotation.StringRes
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.example.washcar.R
+import com.example.washcar.api.auth.model.LoginResponse
 import com.example.washcar.databinding.FragmentLoginBinding
-import com.google.android.gms.tasks.OnCompleteListener
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
-import com.google.firebase.auth.GetTokenResult
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
 
@@ -27,6 +25,7 @@ import com.google.firebase.ktx.Firebase
 class LoginFragment : Fragment() {
 
     private lateinit var auth: FirebaseAuth
+    private lateinit var sessionManager: SessionManager
 
     private lateinit var loginViewModel: LoginViewModel
     private var _binding: FragmentLoginBinding? = null
@@ -39,10 +38,12 @@ class LoginFragment : Fragment() {
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         _binding = FragmentLoginBinding.inflate(inflater, container, false)
 
         auth = Firebase.auth
+
+        sessionManager = SessionManager(requireContext())
 
         binding.goToRegister.setOnClickListener {
             findNavController().navigate(R.id.action_loginFragment2_to_registerFragment)
@@ -97,11 +98,11 @@ class LoginFragment : Fragment() {
             Observer { loginResult ->
                 loginResult ?: return@Observer
                 loadingProgressBar.visibility = View.GONE
-                loginResult.error?.let {
-                    showLoginFailed(it)
-                }
+                showLoginFailed(loginResult.error)
                 loginResult.success?.let {
-                    //updateUiWithUser(it)
+                    updateUiWithUser(it)
+                    saveAccessToken(it.accessToken)
+
                 }
             })
 
@@ -139,9 +140,23 @@ class LoginFragment : Fragment() {
                 usernameEditText.text.toString(),
                 passwordEditText.text.toString()
             )
+            //findNavController().navigate(R.id.action_loginFragment2_to_blankFragment)
+            loginViewModel.loginStatus.observe(viewLifecycleOwner, Observer {
+                if (it){
+                    Log.i("loginStatus", "$it")
+                    findNavController().navigate(R.id.action_loginFragment2_to_blankFragment)
+                    loginViewModel.setStatusFalse()
+
+                }
+                Log.i("loginStatus", "$it")
+            })
+//            if(loginViewModel.loginStatus.value == true){
+//                findNavController().navigate(R.id.action_loginFragment2_to_blankFragment)
+//            }
 
 
-            signInWithFirebase(usernameEditText.text.toString(), passwordEditText.text.toString())
+
+            //signIn(usernameEditText.text.toString(), passwordEditText.text.toString())
 
 
         }
@@ -164,7 +179,7 @@ class LoginFragment : Fragment() {
                             // ...
 
                             //incluir o retrofit para mandar o token para a API Node.js
-                            Log.i("token", "$idToken")
+                           // Log.i("token", "$idToken")
                        } else {
                           // Handle error -> task.getException();
                         }
@@ -184,13 +199,28 @@ class LoginFragment : Fragment() {
             }
         }
     }
+    private fun signIn(email: String, password: String) {
+        loginViewModel.login(email,password)
+        loginViewModel.loginResult.observe(viewLifecycleOwner, Observer {
+            //findNavController().navigate(R.id.action_loginFragment2_to_blankFragment)
+        })
+
+
+    }
 
     // Nao usar, pq para qualquer usuario digitado ele eh dado como aceito
-    private fun updateUiWithUser(model: LoggedInUserView) {
-        val welcome = getString(R.string.welcome) + model.displayName
+    private fun updateUiWithUser(model: LoginResponse) {
+        val welcome = getString(R.string.welcome)
         // TODO : initiate successful logged in experience
         val appContext = context?.applicationContext ?: return
-        //Toast.makeText(appContext, welcome, Toast.LENGTH_LONG).show()
+        Toast.makeText(appContext, welcome, Toast.LENGTH_LONG).show()
+
+
+    }
+
+    private fun saveAccessToken(token: String) {
+        Log.i("token", "$token")
+        sessionManager.saveAuthToken(token)
 
     }
 
@@ -207,7 +237,7 @@ class LoginFragment : Fragment() {
         }
     }
 
-    private fun showLoginFailed(@StringRes errorString: Int) {
+    private fun showLoginFailed(errorString: String) {
         val appContext = context?.applicationContext ?: return
         Toast.makeText(appContext, errorString, Toast.LENGTH_LONG).show()
     }

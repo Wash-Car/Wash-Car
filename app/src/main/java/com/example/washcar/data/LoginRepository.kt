@@ -1,6 +1,12 @@
 package com.example.washcar.data
 
+import com.example.washcar.api.RetrofitInstance
+import com.example.washcar.api.auth.model.LoginRequest
+import com.example.washcar.api.auth.model.LoginResponse
 import com.example.washcar.data.model.LoggedInUser
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 
 /**
  * Class that requests authentication and user information from the remote data source and
@@ -8,6 +14,7 @@ import com.example.washcar.data.model.LoggedInUser
  */
 
 class LoginRepository(val dataSource: LoginDataSource) {
+    private lateinit var result : LoginResponse
 
     // in-memory cache of the loggedInUser object
     var user: LoggedInUser? = null
@@ -27,15 +34,13 @@ class LoginRepository(val dataSource: LoginDataSource) {
         dataSource.logout()
     }
 
-    fun login(username: String, password: String): Result<LoggedInUser> {
+  suspend fun login(loginRequest: LoginRequest): Call<LoginResponse> {
         // handle login
-        val result = dataSource.login(username, password)
+      return RetrofitInstance.authApi.login(loginRequest)
 
-        if (result is Result.Success) {
-            setLoggedInUser(result.data)
-        }
 
-        return result
+
+
     }
 
     private fun setLoggedInUser(loggedInUser: LoggedInUser) {
