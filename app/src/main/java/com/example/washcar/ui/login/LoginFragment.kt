@@ -101,7 +101,7 @@ class LoginFragment : Fragment() {
                 showLoginFailed(loginResult.error)
                 loginResult.success?.let {
                     updateUiWithUser(it)
-                    saveAccessToken(it.accessToken)
+                    saveUserLogin(it.accessToken, it.id)
 
                 }
             })
@@ -218,8 +218,8 @@ class LoginFragment : Fragment() {
 
     }
 
-    private fun saveAccessToken(token: String) {
-        Log.i("token", "$token")
+    private fun saveUserLogin(token: String, id: Int) {
+        Log.i("UserLogin", "id:$id, $token")
         sessionManager.saveAuthToken(token)
 
     }
