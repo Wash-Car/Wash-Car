@@ -1,13 +1,14 @@
-package com.example.washcar
+package com.example.washcar.homeFragment
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import com.example.washcar.R
 
 
-class BlankFragment : Fragment() {
+class HomeFragment : Fragment() {
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
