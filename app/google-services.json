@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "365096535881",
+    "project_id": "autenticationwashcar",
+    "storage_bucket": "autenticationwashcar.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:365096535881:android:4fe76d300e938836c1bc98",
+        "android_client_info": {
+          "package_name": "com.example.washcar"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "365096535881-ctsc84ui5n04udsf1dlejq600bd83vu0.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDwpNJJcqJsH5u_SIjsD2tP83qu7NA3xB4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "365096535881-ctsc84ui5n04udsf1dlejq600bd83vu0.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
