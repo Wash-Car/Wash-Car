@@ -40,7 +40,7 @@ class RegisterFragment : Fragment() {
 
 
 
-        binding.button.setOnClickListener {
+        binding.textButton.setOnClickListener {
             Log.i("response", "${viewModel.userRequest}")
             viewModel.createUser(viewModel.userRequest)
 

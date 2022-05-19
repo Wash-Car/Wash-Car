@@ -8,7 +8,13 @@ data class UserRequest (
     @SerializedName("password")
     var password : String,
     @SerializedName("name")
-    var name: String?
+    var name: String?,
+    @SerializedName("username")
+    var username: String,
+    @SerializedName("telefone")
+    var telefone: String,
+    @SerializedName("funcao")
+    var funcao: String
 ){
-    constructor() :this("", "", "")
+    constructor() :this("", "", "", "", "", "")
 }
