@@ -3,12 +3,12 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/my_nav"
-    app:startDestination="@id/loginFragment2">
+    app:startDestination="@id/blankFragment">
 
     <fragment
         android:id="@+id/registerFragment"
         android:name="com.example.washcar.registerFragment.RegisterFragment"
-        android:label="fragment_register"
+        android:label="Cadastro"
         tools:layout="@layout/fragment_register" >
         <action
             android:id="@+id/action_registerFragment_to_loginFragment2"
@@ -17,7 +17,7 @@
     <fragment
         android:id="@+id/loginFragment2"
         android:name="com.example.washcar.ui.login.LoginFragment"
-        android:label="fragment_login"
+        android:label="Login"
         tools:layout="@layout/fragment_login" >
         <action
             android:id="@+id/action_loginFragment2_to_registerFragment"
@@ -28,8 +28,8 @@
     </fragment>
     <fragment
         android:id="@+id/blankFragment"
-        android:name="com.example.washcar.BlankFragment"
-        android:label="fragment_blank"
+        android:name="com.example.washcar.homeFragment.HomeFragment"
+        android:label="Home"
         tools:layout="@layout/fragment_blank" >
         <action
             android:id="@+id/action_blankFragment_to_loginFragment2"
