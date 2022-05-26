@@ -23,6 +23,7 @@ class HomeFragment : Fragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
+
     }
 
     override fun onCreateView(
@@ -35,6 +36,9 @@ class HomeFragment : Fragment() {
         // Inflate the layout for this fragment
         viewModel = ViewModelProvider(this).get(HomeFragmentViewModel::class.java)
         binding.viewmodel = viewModel
+        bindingHeaderNavigation.viewmodel = viewModel
+
+
 
 
 

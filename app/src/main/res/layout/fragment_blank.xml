@@ -9,18 +9,26 @@
             type="com.example.washcar.homeFragment.HomeFragmentViewModel" />
     </data>
 
+
+
     <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         tools:context=".homeFragment.HomeFragment">
 
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:layout_width="wrap_content"
+        <ScrollView
+            android:layout_width="match_parent"
             android:layout_height="match_parent">
 
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="bottom"
+                >
 
+                <include layout="@layout/bottom_navigation"/>
+            </LinearLayout>
+        </ScrollView>
 
-
-        </androidx.constraintlayout.widget.ConstraintLayout>
     </FrameLayout>
 </layout>

@@ -4,7 +4,9 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
-
+<variable
+    name="viewmodel"
+    type="com.example.washcar.homeFragment.HomeFragmentViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -12,11 +14,6 @@
         android:layout_height="match_parent"
         tools:context=".MainActivity">
 
-        <androidx.drawerlayout.widget.DrawerLayout
-            android:id="@+id/drawerLayout"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:fitsSystemWindows="true">
 
 
 
@@ -33,15 +30,6 @@
                 app:navGraph="@navigation/my_nav" />
 
 
-            <com.google.android.material.navigation.NavigationView
-                android:id="@+id/navigationView"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:layout_gravity="start"
-                android:fitsSystemWindows="true"
-                app:headerLayout="@layout/header_navigation_drawer"
-                app:menu="@menu/navigation_drawer" />
 
-        </androidx.drawerlayout.widget.DrawerLayout>
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
