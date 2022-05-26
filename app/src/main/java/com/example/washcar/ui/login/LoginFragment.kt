@@ -221,6 +221,7 @@ class LoginFragment : Fragment() {
     private fun saveUserLogin(token: String, id: Int) {
         Log.i("UserLogin", "id:$id, $token")
         sessionManager.saveAuthToken(token)
+        sessionManager.saveUserId(id)
 
     }
 
