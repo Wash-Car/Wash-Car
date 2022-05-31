@@ -144,7 +144,7 @@ class LoginFragment : Fragment() {
             loginViewModel.loginStatus.observe(viewLifecycleOwner, Observer {
                 if (it){
                     Log.i("loginStatus", "$it")
-                    findNavController().navigate(R.id.action_loginFragment2_to_blankFragment)
+                    findNavController().navigate(R.id.action_loginFragment2_to_home_navigation)
                     loginViewModel.setStatusFalse()
 
                 }
