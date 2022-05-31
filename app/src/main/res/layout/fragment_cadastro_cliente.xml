@@ -10,7 +10,7 @@
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".CadastroClienteFragment">
+        tools:context=".cadastrarClienteFragment.CadastroClienteFragment">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
@@ -35,7 +35,8 @@
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/textFieldNomeCompletoCliente"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content" />
+                    android:layout_height="wrap_content"
+                    android:focusable="true"/>
 
             </com.google.android.material.textfield.TextInputLayout>
 
