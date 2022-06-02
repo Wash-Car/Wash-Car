@@ -3,8 +3,12 @@ package com.example.washcar
 import android.app.PendingIntent.getActivity
 import android.os.Bundle
 import android.util.Log
+import android.view.GestureDetector
+import android.view.MotionEvent
 import android.view.inputmethod.InputMethodManager
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.view.GestureDetectorCompat
+import androidx.core.view.MotionEventCompat
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
@@ -19,6 +23,7 @@ class MainActivity : AppCompatActivity() {
     lateinit var binding: ActivityMainBinding
     //lateinit var bindingCadstroClienteFragment: FragmentCadastroClienteBinding
 
+
     lateinit var viewModel: HomeFragmentViewModel
     lateinit var viewmodelCadastroCliente : CadastroClienteFragmentViewModel
 
@@ -30,6 +35,13 @@ class MainActivity : AppCompatActivity() {
         viewModel = ViewModelProvider(this).get(HomeFragmentViewModel::class.java)
         viewmodelCadastroCliente = ViewModelProvider(this).get(CadastroClienteFragmentViewModel::class.java)
         binding.viewmodel = viewModel
+
+
+
+
+
+
+
 
         val navHostFragment =
             supportFragmentManager.findFragmentById(binding.fragmentContainerView2.id) as NavHostFragment
@@ -57,6 +69,34 @@ class MainActivity : AppCompatActivity() {
 
 
     }
+
+    override fun onTouchEvent(event: MotionEvent?): Boolean {
+        val action : Int = MotionEventCompat.getActionMasked(event)
+
+        return when (action) {
+            MotionEvent.ACTION_DOWN -> {
+                Log.d("DEBUG_TAG", "Action was DOWN")
+                true
+            }
+            MotionEvent.ACTION_MOVE -> {
+                Log.d("DEBUG_TAG", "Action was MOVE")
+                true
+            }
+            MotionEvent.ACTION_UP -> {
+                Log.d("DEBUG_TAG", "Action was UP")
+                true
+            }
+            MotionEvent.ACTION_CANCEL -> {
+                Log.d("DEBUG_TAG", "Action was CANCEL")
+                true
+            }
+            MotionEvent.ACTION_OUTSIDE -> {
+                Log.d("DEBUG_TAG", "Movement occurred outside bounds of current screen element")
+                true
+            }
+            else -> super.onTouchEvent(event)
+        }
+    }
 //    override fun onSupportNavigateUp(): Boolean {
 //        val navController = findNavController(R.id.fragment)
 //        return NavigationUI.navigateUp(navController, binding.drawerLayout)
@@ -64,3 +104,8 @@ class MainActivity : AppCompatActivity() {
 
 
 }
+
+
+
+
+

@@ -1,13 +1,13 @@
 package com.example.washcar.cadastrarClienteFragment
 
 import android.content.Context
+import android.content.Context.INPUT_METHOD_SERVICE
 import android.os.Bundle
 import android.util.Log
-import android.view.GestureDetector
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import android.view.*
 import android.view.inputmethod.InputMethodManager
+import android.widget.Scroller
+import androidx.core.view.MotionEventCompat
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
@@ -18,6 +18,8 @@ import com.example.washcar.databinding.FragmentCadastroClienteBinding
 class CadastroClienteFragment : Fragment() {
     lateinit var binding: FragmentCadastroClienteBinding
     lateinit var viewmodelCadastroCliente : CadastroClienteFragmentViewModel
+
+    lateinit var scroller : Scroller
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -30,49 +32,17 @@ class CadastroClienteFragment : Fragment() {
 
 
 
-        viewmodelCadastroCliente.resetInputIsFocus()
-
+        scroller = Scroller(requireContext())
 
         val imm = requireActivity().applicationContext.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
-        imm.isAcceptingText
 
-        //Log.i("fragment", "${imm.isActive}")
-
-
-
-
-
-
-
-//        binding.textFieldNomeCompletoCliente.isTextInputLayoutFocusedRectEnabled = true
-//
-//
-//        viewmodelCadastroCliente.inputIsFocus.observe(viewLifecycleOwner, Observer {
-//            if (it){
-//
-//            }else{
-//                if (imm.isAcceptingText){
-//                    Log.i("teste", "teclado apareceu")
-//                    viewmodelCadastroCliente.changeInputIsFocus()
-//                }else{
-//                    Log.i("teste", "teclado nao apareceu")
-//                }
-//            }
-//        })
-//
-//
-//
-//
-//
-//        binding.button.setOnClickListener {
-//            Log.i("teste", "${imm.isAcceptingText}")
-//            viewmodelCadastroCliente.resetInputIsFocus()
-//        }
-//
-
-
+        binding.scrollView.setOnScrollChangeListener { v, scrollX, scrollY, oldScrollX, oldScrollY ->
+          imm.hideSoftInputFromWindow(requireView().applicationWindowToken,0)
+       }
 
         return binding.root
     }
+
+
 
 }

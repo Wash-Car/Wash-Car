@@ -37,6 +37,7 @@
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/textFieldNomeCompleto"
                     android:layout_width="match_parent"
+                    android:inputType="text"
                     android:layout_height="wrap_content" />
 
             </com.google.android.material.textfield.TextInputLayout>
@@ -57,6 +58,8 @@
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/textFieldEmail"
                     android:layout_width="match_parent"
+                    android:inputType="textEmailAddress"
+                    android:text="@={viewmodel.userRequest.email}"
                     android:layout_height="wrap_content" />
 
             </com.google.android.material.textfield.TextInputLayout>
@@ -77,6 +80,7 @@
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/textFieldSenha"
+                    android:inputType="textPassword"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content" />
 
@@ -98,6 +102,7 @@
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/textFieldRepetirSenha"
                     android:layout_width="match_parent"
+                    android:inputType="textPassword"
                     android:layout_height="wrap_content" />
 
             </com.google.android.material.textfield.TextInputLayout>
@@ -109,15 +114,15 @@
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="16dp"
                 android:layout_marginEnd="16dp"
-                android:layout_marginBottom="72dp"
                 android:hint="Função"
-                app:layout_constraintBottom_toTopOf="@+id/textButton"
+                app:layout_constraintBottom_toTopOf="@+id/outlinedTextFieldTelefone"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/outlinedTextFieldRepetirSenha">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/textFieldFuncao"
+
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content" />
 
@@ -134,8 +139,30 @@
                 android:text="Cadastrar"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent" />
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/outlinedTextFieldTelefone"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="16dp"
+                android:layout_marginBottom="16dp"
+                android:hint="Telefone"
+                app:layout_constraintBottom_toTopOf="@+id/textButton"
+                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/outlinedTextFieldFuncao" />
+                app:layout_constraintTop_toBottomOf="@+id/outlinedTextFieldFuncao">
+
+               <com.santalu.maskara.widget.MaskEditText
+                   android:layout_width="match_parent"
+                   android:layout_height="match_parent"
+                   android:inputType="phone"
+                   app:mask="+55 (__) _____-____">
+               </com.santalu.maskara.widget.MaskEditText>
+
+            </com.google.android.material.textfield.TextInputLayout>
 
 
         </androidx.constraintlayout.widget.ConstraintLayout>

@@ -3,10 +3,13 @@ package com.example.washcar.registerFragment
 import android.content.Context.MODE_PRIVATE
 import android.content.SharedPreferences
 import android.os.Bundle
+import android.text.Editable
+import android.text.TextWatcher
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.widget.addTextChangedListener
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
@@ -36,6 +39,12 @@ class RegisterFragment : Fragment() {
 
 
 
+        var senha = binding.textFieldSenha.text
+
+
+
+
+
 
 
 
@@ -50,11 +59,52 @@ class RegisterFragment : Fragment() {
 
 
 
+        binding.textFieldRepetirSenha.text
+
+//        binding.textFieldTelefone.addTextChangedListener(object : TextWatcher{
+//            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
+//                TODO("Not yet implemented")
+//            }
+//
+//            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+//                TODO("Not yet implemented")
+//            }
+//
+//            override fun afterTextChanged(s: Editable?) {
+//                TODO("Not yet implemented")
+//            }
+//
+//        })
+
+
 
 
         binding.textButton.setOnClickListener {
             Log.i("response", "${viewModel.userRequest}")
-            viewModel.createUser(viewModel.userRequest)
+            //viewModel.createUser(viewModel.userRequest)
+
+            Log.i("response", "${binding.textFieldSenha.text}")
+            Log.i("response", "${binding.textFieldRepetirSenha.text}")
+
+            var senha = binding.textFieldSenha.text
+            var repitirSenha = binding.textFieldRepetirSenha.text
+            var email = binding.textFieldEmail.text
+
+
+            //verificar se eh um email valido
+            if (email.toString().contains("@")){
+                Log.i("response", "${email}")
+            }else{
+                Log.i("response", "${email} invalido")
+            }
+
+            //verificar igualdade das senhas
+            if (senha.toString() == repitirSenha.toString()){
+                Log.i("response", "Senhas iguais")
+            }else{
+                Log.i("response", "Senhas diferentes")
+                Log.i("response", "$senha, $repitirSenha")
+            }
 
         }
 
