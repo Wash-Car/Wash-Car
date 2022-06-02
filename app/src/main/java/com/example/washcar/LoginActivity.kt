@@ -2,10 +2,32 @@ package com.example.washcar
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.databinding.DataBindingUtil
+import androidx.navigation.fragment.NavHostFragment
+import androidx.navigation.ui.AppBarConfiguration
+import androidx.navigation.ui.NavigationUI
+import androidx.navigation.ui.setupWithNavController
+import com.example.washcar.databinding.ActivityLoginBinding
 
 class LoginActivity : AppCompatActivity() {
+
+    lateinit var binding: ActivityLoginBinding
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_login)
+
+        binding = DataBindingUtil.setContentView(this, R.layout.activity_login)
+
+        setContentView(binding.root)
+
+        val navHostFragment = (supportFragmentManager.findFragmentById(binding.fragmentContainerView.id)) as NavHostFragment
+        val navController = navHostFragment.navController
+
+        val appBarConfiguration = AppBarConfiguration(navController.graph)
+
+        //NavigationUI.setupWithNavController(binding.navView, navController, appBarConfiguration)
+
+        //binding.toobar.setupWithNavController(navController, appBarConfiguration)
+
+
     }
 }

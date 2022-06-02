@@ -140,16 +140,16 @@ class LoginFragment : Fragment() {
                 usernameEditText.text.toString(),
                 passwordEditText.text.toString()
             )
-            //findNavController().navigate(R.id.action_loginFragment2_to_blankFragment)
-            loginViewModel.loginStatus.observe(viewLifecycleOwner, Observer {
-                if (it){
-                    Log.i("loginStatus", "$it")
-                    findNavController().navigate(R.id.action_loginFragment2_to_home_navigation)
-                    loginViewModel.setStatusFalse()
-
-                }
-                Log.i("loginStatus", "$it")
-            })
+            findNavController().navigate(R.id.action_loginFragment2_to_mainActivity)
+//            loginViewModel.loginStatus.observe(viewLifecycleOwner, Observer {
+//                if (it){
+//                    Log.i("loginStatus", "$it")
+//                    findNavController().navigate(R.id.action_loginFragment2_to_home_navigation)
+//                    loginViewModel.setStatusFalse()
+//
+//                }
+//                Log.i("loginStatus", "$it")
+//            })
 //            if(loginViewModel.loginStatus.value == true){
 //                findNavController().navigate(R.id.action_loginFragment2_to_blankFragment)
 //            }

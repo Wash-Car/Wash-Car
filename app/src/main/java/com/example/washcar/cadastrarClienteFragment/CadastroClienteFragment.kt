@@ -2,11 +2,13 @@ package com.example.washcar.cadastrarClienteFragment
 
 import android.content.Context
 import android.content.Context.INPUT_METHOD_SERVICE
+import android.os.Build
 import android.os.Bundle
 import android.util.Log
 import android.view.*
 import android.view.inputmethod.InputMethodManager
 import android.widget.Scroller
+import androidx.annotation.RequiresApi
 import androidx.core.view.MotionEventCompat
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
@@ -21,6 +23,7 @@ class CadastroClienteFragment : Fragment() {
 
     lateinit var scroller : Scroller
 
+    @RequiresApi(Build.VERSION_CODES.M)
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
