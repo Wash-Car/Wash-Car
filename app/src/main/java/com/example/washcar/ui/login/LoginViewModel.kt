@@ -36,20 +36,24 @@ class LoginViewModel(private val loginRepository: LoginRepository) : ViewModel()
 
            val login = LoginRequest(email,password)
            val response = loginRepository.login(login)
+           _loginStatus.value = true
            response.enqueue(object : Callback<LoginResponse>{
 
                override fun onResponse(
                    call: Call<LoginResponse>,
                    response: Response<LoginResponse>
                ) {
-                   if (response.code() == 200){
+                   if (response.code() == 201){
                        _loginStatus.value = true
-                       //Log.i("responsee", "${response.body()}")
+                       Log.i("responses", "${response.code()}")
+                       Log.i("responses", "${_loginStatus.value}")
                        _loginResult.value =
                            LoginResult(success = response.body())
 
                    }else if(response.code() == 401){
                        _loginStatus.value = false
+                       Log.i("responses", "${response.code()}")
+                       Log.i("responses", "${_loginStatus.value}")
                        _loginResult.value = LoginResult(error = "Email e/ou senha incorretos")
 
                    }

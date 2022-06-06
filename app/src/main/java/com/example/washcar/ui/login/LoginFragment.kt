@@ -100,8 +100,9 @@ class LoginFragment : Fragment() {
                 loadingProgressBar.visibility = View.GONE
                 showLoginFailed(loginResult.error)
                 loginResult.success?.let {
+                    Log.i("responses", "entrou no observer de loginResult")
                     updateUiWithUser(it)
-                    saveUserLogin(it.accessToken, it.id)
+                    saveUserLogin(it.accessToken)
 
                 }
             })
@@ -136,27 +137,23 @@ class LoginFragment : Fragment() {
 
         loginButton.setOnClickListener {
             loadingProgressBar.visibility = View.VISIBLE
-            loginViewModel.login(
-                usernameEditText.text.toString(),
-                passwordEditText.text.toString()
-            )
-            findNavController().navigate(R.id.action_loginFragment2_to_mainActivity)
-//            loginViewModel.loginStatus.observe(viewLifecycleOwner, Observer {
-//                if (it){
-//                    Log.i("loginStatus", "$it")
-//                    findNavController().navigate(R.id.action_loginFragment2_to_home_navigation)
-//                    loginViewModel.setStatusFalse()
-//
-//                }
-//                Log.i("loginStatus", "$it")
-//            })
-//            if(loginViewModel.loginStatus.value == true){
-//                findNavController().navigate(R.id.action_loginFragment2_to_blankFragment)
-//            }
+            Log.i("responses", "${usernameEditText.text.toString()}, ${passwordEditText.text.toString()}")
 
+//            loginViewModel.login(
+//                usernameEditText.text.toString(),
+//                passwordEditText.text.toString()
+//            )
 
+            signIn(usernameEditText.text.toString(), passwordEditText.text.toString())
 
-            //signIn(usernameEditText.text.toString(), passwordEditText.text.toString())
+            loginViewModel.loginStatus.observe(viewLifecycleOwner, Observer {
+                if (it){
+                    findNavController().navigate(R.id.action_loginFragment2_to_mainActivity)
+                }else{
+                    Log.i("login", "email e/ou senha incorretos")
+                }
+            })
+
 
 
         }
@@ -200,11 +197,8 @@ class LoginFragment : Fragment() {
         }
     }
     private fun signIn(email: String, password: String) {
-        loginViewModel.login(email,password)
-        loginViewModel.loginResult.observe(viewLifecycleOwner, Observer {
-            //findNavController().navigate(R.id.action_loginFragment2_to_blankFragment)
-        })
 
+        loginViewModel.login(email,password)
 
     }
 
@@ -218,10 +212,10 @@ class LoginFragment : Fragment() {
 
     }
 
-    private fun saveUserLogin(token: String, id: Int) {
-        Log.i("UserLogin", "id:$id, $token")
+    private fun saveUserLogin(token: String) {
+        Log.i("UserLogin", "$token")
         sessionManager.saveAuthToken(token)
-        sessionManager.saveUserId(id)
+        //sessionManager.saveUserId(id)
 
     }
 

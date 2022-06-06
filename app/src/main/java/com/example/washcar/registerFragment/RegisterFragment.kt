@@ -17,6 +17,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.example.washcar.R
 import com.example.washcar.WashCarApplication
+import com.example.washcar.api.user.model.UserRequest
 import com.example.washcar.databinding.FragmentRegisterBinding
 
 import com.example.washcar.ui.login.SessionManager
@@ -62,23 +63,6 @@ class RegisterFragment : Fragment() {
 
 
         binding.textFieldRepetirSenha.text
-
-//        binding.textFieldTelefone.addTextChangedListener(object : TextWatcher{
-//            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
-//                TODO("Not yet implemented")
-//            }
-//
-//            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
-//                TODO("Not yet implemented")
-//            }
-//
-//            override fun afterTextChanged(s: Editable?) {
-//                TODO("Not yet implemented")
-//            }
-//
-//        })
-
-
 
 
         binding.textButton.setOnClickListener {
@@ -155,6 +139,7 @@ class RegisterFragment : Fragment() {
             Log.i("response", "validate $validate")
             if(validate){
                 Toast.makeText(requireContext(), "usuario cadastrado", Toast.LENGTH_LONG).show()
+                viewModel.createUser(viewModel.userRequest)
                 findNavController().navigate(R.id.action_registerFragment_to_loginFragment2)
             }else{
                 Toast.makeText(requireContext(), "erro ao cadastrar, verifique os campos", Toast.LENGTH_LONG).show()
