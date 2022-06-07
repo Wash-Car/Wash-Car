@@ -34,15 +34,17 @@ class LoginViewModel(private val loginRepository: LoginRepository) : ViewModel()
     fun login(email: String, password: String)  {
        viewModelScope.launch {
 
-           val login = LoginRequest(email,password)
+           val login = LoginRequest(email, password)
            val response = loginRepository.login(login)
-           _loginStatus.value = true
+
            response.enqueue(object : Callback<LoginResponse>{
 
                override fun onResponse(
                    call: Call<LoginResponse>,
                    response: Response<LoginResponse>
+
                ) {
+                   Log.i("responses", "${response.body()}")
                    if (response.code() == 201){
                        _loginStatus.value = true
                        Log.i("responses", "${response.code()}")

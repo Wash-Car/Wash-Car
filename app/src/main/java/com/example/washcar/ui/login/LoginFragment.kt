@@ -139,18 +139,15 @@ class LoginFragment : Fragment() {
             loadingProgressBar.visibility = View.VISIBLE
             Log.i("responses", "${usernameEditText.text.toString()}, ${passwordEditText.text.toString()}")
 
-//            loginViewModel.login(
-//                usernameEditText.text.toString(),
-//                passwordEditText.text.toString()
-//            )
+//            loginViewModel.login(usernameEditText.text.toString(), passwordEditText.text.toString())
+//
 
-            signIn(usernameEditText.text.toString(), passwordEditText.text.toString())
-
+            loginViewModel.login(usernameEditText.text.toString(), passwordEditText.text.toString())
             loginViewModel.loginStatus.observe(viewLifecycleOwner, Observer {
                 if (it){
                     findNavController().navigate(R.id.action_loginFragment2_to_mainActivity)
                 }else{
-                    Log.i("login", "email e/ou senha incorretos")
+                    Log.i("responses", "email e/ou senha incorretos")
                 }
             })
 
@@ -196,11 +193,11 @@ class LoginFragment : Fragment() {
             }
         }
     }
-    private fun signIn(email: String, password: String) {
-
-        loginViewModel.login(email,password)
-
-    }
+//    private fun signIn(email: String, password: String) {
+//
+//        loginViewModel.login(email,password)
+//
+//    }
 
     // Nao usar, pq para qualquer usuario digitado ele eh dado como aceito
     private fun updateUiWithUser(model: LoginResponse) {
