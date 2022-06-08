@@ -10,7 +10,7 @@
     <fragment
         android:id="@+id/registerFragment"
         android:name="com.example.washcar.registerFragment.RegisterFragment"
-        android:label="Cadastro"
+        android:label="Cadastrar Funcionario"
         tools:layout="@layout/fragment_register" >
         <action
             android:id="@+id/action_registerFragment_to_loginFragment2"

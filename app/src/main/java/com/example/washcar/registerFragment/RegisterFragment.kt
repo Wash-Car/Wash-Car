@@ -9,6 +9,8 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ArrayAdapter
+import android.widget.AutoCompleteTextView
 import android.widget.Toast
 import androidx.core.widget.addTextChangedListener
 import androidx.databinding.DataBindingUtil
@@ -44,6 +46,9 @@ class RegisterFragment : Fragment() {
 
         var senha = binding.textFieldSenha.text
 
+        val items = listOf("Administrador","Funcionario")
+        val adapter = ArrayAdapter(requireContext(), R.layout.list_item_funcao, items)
+        (binding.textFieldFuncao as? AutoCompleteTextView)?.setAdapter(adapter)
 
 
 

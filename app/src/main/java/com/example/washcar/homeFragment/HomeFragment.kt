@@ -7,6 +7,7 @@ import android.view.*
 import androidx.fragment.app.Fragment
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModelProvider
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.washcar.R
 import com.example.washcar.databinding.FragmentBlankBinding
 import com.example.washcar.databinding.HeaderNavigationDrawerBinding
@@ -44,6 +45,10 @@ class HomeFragment : Fragment() {
 
 
        Log.i("shared", "${sessionManager.fetchAuthToken()}")
+
+        var adapter = HomeAdapter()
+        binding.recyclerView.adapter = adapter
+        binding.recyclerView.layoutManager = LinearLayoutManager(requireContext())
 
         setHasOptionsMenu(true)
         return binding.root

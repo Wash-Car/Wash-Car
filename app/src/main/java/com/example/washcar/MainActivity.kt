@@ -13,6 +13,7 @@ import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.NavHostFragment
+import androidx.navigation.ui.NavigationUI
 import androidx.navigation.ui.setupWithNavController
 import com.example.washcar.cadastrarClienteFragment.CadastroClienteFragmentViewModel
 import com.example.washcar.databinding.ActivityMainBinding
@@ -24,17 +25,16 @@ class MainActivity : AppCompatActivity() {
     //lateinit var bindingCadstroClienteFragment: FragmentCadastroClienteBinding
 
 
-    lateinit var viewModel: HomeFragmentViewModel
-    lateinit var viewmodelCadastroCliente : CadastroClienteFragmentViewModel
+    //lateinit var viewModel: HomeFragmentViewModel
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = DataBindingUtil.setContentView(this, R.layout.activity_main)
-        //bindingCadstroClienteFragment = DataBindingUtil.setContentView(this, R.layout.fragment_cadastro_cliente)
-        viewModel = ViewModelProvider(this).get(HomeFragmentViewModel::class.java)
-        viewmodelCadastroCliente = ViewModelProvider(this).get(CadastroClienteFragmentViewModel::class.java)
-        binding.viewmodel = viewModel
+
+        //viewModel = ViewModelProvider(this).get(HomeFragmentViewModel::class.java)
+
+        //binding.viewmodel = viewModel
 
 
 
@@ -47,19 +47,20 @@ class MainActivity : AppCompatActivity() {
             supportFragmentManager.findFragmentById(binding.fragmentContainerView2.id) as NavHostFragment
         val navController = navHostFragment.navController
 
+
 //
 //        val imm = this.applicationContext.getSystemService(INPUT_METHOD_SERVICE) as InputMethodManager
 //
 //        Log.i("main", "${imm.isActive}")
 
-
-        viewmodelCadastroCliente.inputIsFocus.observe(this, Observer {
-            if (it){
-                Log.i("teste", "esconder bottomNavigation")
-            }else{
-                Log.i("teste", "mostrar bottomNavigation")
-            }
-        })
+//
+//        viewmodelCadastroCliente.inputIsFocus.observe(this, Observer {
+//            if (it){
+//                Log.i("teste", "esconder bottomNavigation")
+//            }else{
+//                Log.i("teste", "mostrar bottomNavigation")
+//            }
+//        })
 
 
 

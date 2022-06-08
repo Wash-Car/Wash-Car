@@ -25,26 +25,33 @@ class HomeAdapter : androidx.recyclerview.widget.ListAdapter<Lavagem, HomeAdapte
                 return ListViewHolder(binding)
             }
         }
-        fun bind(currentIntem: Lavagem){
+        fun bind(currentItem: Lavagem){
             binding.lavagem
         }
     }
     class LavagemDiffCallBack : DiffUtil.ItemCallback<Lavagem>(){
         override fun areItemsTheSame(oldItem: Lavagem, newItem: Lavagem): Boolean {
-            TODO("Not yet implemented")
+            return oldItem.id == newItem.id
         }
 
         override fun areContentsTheSame(oldItem: Lavagem, newItem: Lavagem): Boolean {
-            TODO("Not yet implemented")
+            return oldItem == newItem
         }
 
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ListViewHolder {
-        TODO("Not yet implemented")
+        return ListViewHolder.from(parent)
     }
 
     override fun onBindViewHolder(holder: ListViewHolder, position: Int) {
-        TODO("Not yet implemented")
+        val currentItem = currentList[position]
+        holder.bind(currentItem)
+    }
+
+    override fun getItemId(position: Int): Long {
+        var id = currentList[position].id
+
+        return id
     }
 }

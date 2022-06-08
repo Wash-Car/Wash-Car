@@ -145,6 +145,7 @@ class LoginFragment : Fragment() {
             loginViewModel.login(usernameEditText.text.toString(), passwordEditText.text.toString())
             loginViewModel.loginStatus.observe(viewLifecycleOwner, Observer {
                 if (it){
+                    Log.i("responses", "$it")
                     findNavController().navigate(R.id.action_loginFragment2_to_mainActivity)
                 }else{
                     Log.i("responses", "email e/ou senha incorretos")

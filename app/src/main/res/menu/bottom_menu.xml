@@ -17,7 +17,7 @@
     <item
         android:id="@+id/cadastroClienteFragment"
         android:enabled="true"
-        android:icon="@drawable/ic_baseline_home_24"
-        android:title="Cadastros"/>
+        android:icon="@drawable/ic_baseline_person_add_24"
+        android:title="Clientes"/>
 
 </menu>

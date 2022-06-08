@@ -36,7 +36,7 @@ class LoginViewModel(private val loginRepository: LoginRepository) : ViewModel()
 
            val login = LoginRequest(email,password)
            val response = loginRepository.login(login)
-           _loginStatus.value = true
+           //_loginStatus.value = true
            response.enqueue(object : Callback<LoginResponse>{
 
                override fun onResponse(
