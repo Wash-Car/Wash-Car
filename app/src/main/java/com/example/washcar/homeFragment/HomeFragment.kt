@@ -2,6 +2,7 @@ package com.example.washcar.homeFragment
 
 import android.app.FragmentBreadCrumbs
 import android.os.Bundle
+import android.util.Log
 import android.view.*
 import androidx.fragment.app.Fragment
 import androidx.databinding.DataBindingUtil
@@ -36,11 +37,13 @@ class HomeFragment : Fragment() {
         // Inflate the layout for this fragment
         viewModel = ViewModelProvider(this).get(HomeFragmentViewModel::class.java)
         binding.viewmodel = viewModel
+        sessionManager = SessionManager(requireContext())
+
         bindingHeaderNavigation.viewmodel = viewModel
 
 
 
-
+       Log.i("shared", "${sessionManager.fetchAuthToken()}")
 
         setHasOptionsMenu(true)
         return binding.root
