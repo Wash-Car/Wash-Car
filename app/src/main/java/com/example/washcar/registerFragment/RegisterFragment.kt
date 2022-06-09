@@ -122,7 +122,7 @@ class RegisterFragment : Fragment() {
             }
 
 
-            if(senha!!.length < 5){
+            if(senha!!.length < 2){
                 binding.outlinedTextFieldSenha.isErrorEnabled = true
                 binding.outlinedTextFieldSenha.error = "a senha deve ter mais de 5 caracteres"
                 validate = false
