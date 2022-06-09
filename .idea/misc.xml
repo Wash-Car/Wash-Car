@@ -23,8 +23,10 @@
         <entry key="..\:/Users/Bolsista/AndroidStudioProjects/Wash-Car/app/src/main/res/xml/network_security_config.xml" value="0.18802083333333333" />
         <entry key="..\:/Users/filip/AndroidStudioProjects/WashCar/app/src/main/res/layout/activity_main.xml" value="0.25" />
         <entry key="..\:/Users/filip/AndroidStudioProjects/WashCar/app/src/main/res/layout/fragment_blank.xml" value="0.209375" />
+        <entry key="..\:/Users/filip/AndroidStudioProjects/WashCar/app/src/main/res/layout/fragment_cadastro_cliente.xml" value="0.25" />
         <entry key="..\:/Users/filip/AndroidStudioProjects/WashCar/app/src/main/res/layout/fragment_login.xml" value="0.25" />
         <entry key="..\:/Users/filip/AndroidStudioProjects/WashCar/app/src/main/res/layout/fragment_register.xml" value="0.1" />
+        <entry key="..\:/Users/filip/AndroidStudioProjects/WashCar/app/src/main/res/menu/bottom_menu.xml" value="0.13703703703703704" />
       </map>
     </option>
   </component>

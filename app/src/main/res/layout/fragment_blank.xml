@@ -48,7 +48,7 @@
                     android:layout_marginStart="16dp"
                     android:layout_marginTop="24dp"
                     android:layout_marginBottom="16dp"
-                    android:text="Lavagems"
+                    android:text="Lavagens"
                     android:textSize="22sp"
                     app:layout_constraintBottom_toTopOf="@+id/recyclerView"
                     app:layout_constraintStart_toStartOf="parent"
@@ -68,6 +68,7 @@
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/textView4" />
+
                 <com.google.android.material.floatingactionbutton.FloatingActionButton
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -75,7 +76,7 @@
                     android:src="@drawable/ic_baseline_add_24"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
-                    >
+                    tools:ignore="SpeakableTextPresentCheck">
 
 
                 </com.google.android.material.floatingactionbutton.FloatingActionButton>

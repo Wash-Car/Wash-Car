@@ -3,7 +3,7 @@ plugins {
     id 'org.jetbrains.kotlin.android'
     id 'com.google.gms.google-services'
     id 'kotlin-kapt'
-    id 'dagger.hilt.android.plugin'
+
 
 }
 
@@ -14,7 +14,7 @@ android {
 
     defaultConfig {
         applicationId "com.example.washcar"
-        minSdk 23
+        minSdk 24
         targetSdk 31
         versionCode 1
         versionName "1.0"
@@ -74,9 +74,9 @@ dependencies {
 
     implementation 'com.android.support:multidex:1.0.3'
 
-    implementation "com.google.dagger:hilt-android:2.31-alpha"
+   // implementation "com.google.dagger:hilt-android:2.31-alpha"
     implementation 'androidx.navigation:navigation-ui-ktx:2.4.2'
-    kapt "com.google.dagger:hilt-android-compiler:2.31-alpha"
+    //kapt "com.google.dagger:hilt-android-compiler:2.31-alpha"
 
     implementation 'com.google.android.material:material:1.7.0-alpha01'
 
