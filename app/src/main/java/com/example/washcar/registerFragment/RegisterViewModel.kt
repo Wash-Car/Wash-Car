@@ -5,33 +5,59 @@ import com.example.washcar.api.user.model.UserRequest
 import com.example.washcar.api.user.model.UserResponse
 import com.example.washcar.model.User
 import com.example.washcar.repository.RemoteRepository
+
 import kotlinx.coroutines.launch
+import retrofit2.Call
+import retrofit2.Callback
 import retrofit2.Response
 
 
-class RegisterViewModel(private val remoteRepository: RemoteRepository) : ViewModel() {
+class RegisterViewModel(remoteRepository: RemoteRepository) : ViewModel() {
 
-    private var myResponse: MutableLiveData<Response<UserResponse>> = MutableLiveData()
+    //var myResponse: MutableLiveData<Call<UserResponse>> = MutableLiveData()
+    var status : MutableLiveData<Boolean> = MutableLiveData()
+    var errorMessage : MutableLiveData<String> = MutableLiveData()
     var user = User()
     var userRequest = UserRequest()
 
 
+    val remoteRepository =  remoteRepository
+
     fun createUser(userRequest:UserRequest ){
         viewModelScope.launch {
-         val response =   remoteRepository.createUser(userRequest)
-            myResponse.value = response
+            val response =   remoteRepository.createUser(userRequest)
+            response.enqueue(object : Callback<UserResponse>{
+                override fun onResponse(
+                    call: Call<UserResponse>,
+                    response: Response<UserResponse>
+                ) {
+                    if (response.code() == 201){
+                        status.postValue(true)
+                    }else{
+                        status.postValue(false)
+                    }
+
+                }
+
+                override fun onFailure(call: Call<UserResponse>, t: Throwable) {
+                    status.postValue(false)
+                    errorMessage.postValue(t.message)
+                }
+
+            })
+            //myResponse.value = response
         }
     }
 
 
-    class Factory (private val remoteRepository: RemoteRepository) : ViewModelProvider.Factory {
+    class Factory (val remoteRepository: RemoteRepository) : ViewModelProvider.Factory {
         override fun <T : ViewModel> create(modelClass: Class<T>): T {
-            if (modelClass.isAssignableFrom(RegisterViewModel::class.java))
+            if (modelClass.isAssignableFrom(RegisterViewModel::class.java)) {
                 return RegisterViewModel(remoteRepository) as T
+            }
             throw IllegalArgumentException("Unknown ViewModel class")
         }
-}
+    }
 
 
 }
-

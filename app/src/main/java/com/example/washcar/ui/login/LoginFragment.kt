@@ -1,5 +1,6 @@
 package com.example.washcar.ui.login
 
+import android.content.Intent
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
@@ -13,6 +14,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
+import com.example.washcar.MainActivity
 import com.example.washcar.R
 import com.example.washcar.api.auth.model.LoginResponse
 import com.example.washcar.databinding.FragmentLoginBinding
@@ -146,7 +148,10 @@ class LoginFragment : Fragment() {
             loginViewModel.loginStatus.observe(viewLifecycleOwner, Observer {
                 if (it){
                     Log.i("responses", "$it")
-                    findNavController().navigate(R.id.action_loginFragment2_to_mainActivity)
+                    //findNavController().navigate(R.id.action_loginFragment2_to_mainActivity)
+                    startActivity(Intent(requireContext(), MainActivity::class.java))
+
+
                 }else{
                     Log.i("responses", "email e/ou senha incorretos")
                 }

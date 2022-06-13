@@ -15,6 +15,7 @@ import android.widget.Toast
 import androidx.core.widget.addTextChangedListener
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.example.washcar.R
@@ -143,13 +144,22 @@ class RegisterFragment : Fragment() {
 
             Log.i("response", "validate $validate")
             if(validate){
-                Toast.makeText(requireContext(), "usuario cadastrado", Toast.LENGTH_LONG).show()
+                //Toast.makeText(requireContext(), "usuario cadastrado", Toast.LENGTH_LONG).show()
                 viewModel.createUser(viewModel.userRequest)
+
+            }else{
+                //Toast.makeText(requireContext(), "erro ao cadastrar, verifique os campos", Toast.LENGTH_LONG).show()
+            }
+        }
+
+        viewModel.status.observe(viewLifecycleOwner, Observer {
+            if (it){
+                Toast.makeText(requireContext(), "usuario cadastrado", Toast.LENGTH_LONG).show()
                 findNavController().navigate(R.id.action_registerFragment_to_loginFragment2)
             }else{
                 Toast.makeText(requireContext(), "erro ao cadastrar, verifique os campos", Toast.LENGTH_LONG).show()
             }
-        }
+        })
 
 
 
