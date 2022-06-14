@@ -4,7 +4,9 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
-
+        <variable
+            name="viewModel"
+            type="com.example.washcar.cadastrarClienteFragment.CadastroClienteFragmentViewModel" />
     </data>
 
     <ScrollView
@@ -42,6 +44,7 @@
                     android:id="@+id/textFieldNomeCompletoCliente"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:text="@={viewModel.customerRequest.completeName}"
 
 
                     />
@@ -55,15 +58,18 @@
                 android:layout_marginStart="16dp"
                 android:layout_marginEnd="16dp"
                 android:layout_marginBottom="16dp"
-                android:hint="Rua"
+                android:hint="Email"
                 app:layout_constraintBottom_toTopOf="@+id/textInputLayout3"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/outlinedTextFieldNomeCompletoCliente">
 
                 <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/textInputEditTextEmail"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content" />
+                    android:layout_height="wrap_content"
+                    android:text="@={viewModel.customerRequest.email}"
+                    />
 
             </com.google.android.material.textfield.TextInputLayout>
 
@@ -96,10 +102,12 @@
                 app:layout_constraintStart_toEndOf="@+id/textInputLayout3"
                 app:layout_constraintTop_toBottomOf="@+id/textInputLayout2">
 
-                <com.google.android.material.textfield.TextInputEditText
+                <com.santalu.maskara.widget.MaskEditText
+                    android:id="@+id/textInputEditTextCep"
                     android:layout_width="match_parent"
+                    app:mask="_____-___"
                     android:layout_height="wrap_content"
-                    android:hint="Endereço" />
+                    android:hint="CEP" />
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
@@ -115,10 +123,14 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/textInputLayout3">
 
-                <com.google.android.material.textfield.TextInputEditText
+                <com.santalu.maskara.widget.MaskEditText
+                    android:id="@+id/textInputEditTextCpf"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="CPF" />
+                    android:hint="CPF"
+                    app:mask="___.___.___-__"
+                    android:text="@={viewModel.customerRequest.cpf}"
+                    />
 
             </com.google.android.material.textfield.TextInputLayout>
 
@@ -171,10 +183,13 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/textInputLayout8">
 
-                <com.google.android.material.textfield.TextInputEditText
+                <com.santalu.maskara.widget.MaskEditText
+                    android:id="@+id/textInputEditTextPhoneNumber"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="Telefone" />
+                    app:mask="+55 (__) _____-____"
+                    android:hint="Telefone"
+                    />
 
             </com.google.android.material.textfield.TextInputLayout>
 
