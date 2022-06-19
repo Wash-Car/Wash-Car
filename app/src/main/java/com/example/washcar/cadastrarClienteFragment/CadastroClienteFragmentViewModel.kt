@@ -3,7 +3,6 @@ package com.example.washcar.cadastrarClienteFragment
 import androidx.lifecycle.*
 import com.example.washcar.api.customer.model.CustomerRequest
 import com.example.washcar.api.customer.model.CustomerResponse
-import com.example.washcar.registerFragment.RegisterViewModel
 import com.example.washcar.repository.RemoteRepository
 import kotlinx.coroutines.launch
 import retrofit2.Call
@@ -13,10 +12,11 @@ import retrofit2.Response
 class CadastroClienteFragmentViewModel(remoteRepository: RemoteRepository) : ViewModel() {
 
     val remoteRepository =  remoteRepository
-//    private var _customerRequest = MutableLiveData<CustomerRequest>()
-//    val customerRequest : LiveData<CustomerRequest>
-//    get() = _customerRequest
-    var customerRequest = CustomerRequest()
+
+    private var _customerRequest = MutableLiveData<CustomerRequest>()
+    val customerRequest : LiveData<CustomerRequest>
+    get() = _customerRequest
+
     private var _createCustomerStatus = MutableLiveData<Boolean>()
     val createCustomerStatus : LiveData<Boolean>
     get() = _createCustomerStatus
@@ -25,9 +25,13 @@ class CadastroClienteFragmentViewModel(remoteRepository: RemoteRepository) : Vie
     val errorMessage: LiveData<String>
         get() = _errorMessage
 
+    init {
+        _customerRequest.value = CustomerRequest()
+    }
 
 
-    fun createCustomer(customerRequest: CustomerRequest) {
+
+    fun createCustomer(customerRequest: CustomerRequest?) {
         viewModelScope.launch {
             var request = remoteRepository.createCustomer(customerRequest)
             request.enqueue(object : Callback<CustomerResponse> {

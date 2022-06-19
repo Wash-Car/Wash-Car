@@ -107,7 +107,9 @@
                     android:layout_width="match_parent"
                     app:mask="_____-___"
                     android:layout_height="wrap_content"
-                    android:hint="CEP" />
+                    android:hint="CEP"
+                    android:text="@={viewModel.customerRequest.cep}"
+                    />
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
@@ -189,6 +191,7 @@
                     android:layout_height="wrap_content"
                     app:mask="+55 (__) _____-____"
                     android:hint="Telefone"
+                    android:text="@={viewModel.customerRequest.phoneNumber}"
                     />
 
             </com.google.android.material.textfield.TextInputLayout>
