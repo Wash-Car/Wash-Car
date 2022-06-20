@@ -4,15 +4,15 @@ import com.google.gson.annotations.SerializedName
 
 data class CustomerRequest(
     @SerializedName("completeName")
-    var completeName : String,
+    var completeName : String = "",
     @SerializedName("email")
-    var email : String,
+    var email : String = "",
     @SerializedName("cpf")
-    var cpf : String,
+    var cpf : String = "",
     @SerializedName("phoneNumber")
-    var phoneNumber : String,
+    var phoneNumber : String = "",
     @SerializedName("cep")
-    var cep : String
-){
-    constructor() :this("", "", "", "", "")
+    var cep : String = ""
+    ){
+
 }

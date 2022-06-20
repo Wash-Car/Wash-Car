@@ -1,25 +1,22 @@
 package com.example.washcar.cadastrarClienteFragment
 
 import android.content.Context
-import android.content.Context.INPUT_METHOD_SERVICE
 import android.os.Build
 import android.os.Bundle
+import android.text.Editable
 import android.util.Log
 import android.view.*
 import android.view.inputmethod.InputMethodManager
 import android.widget.Scroller
 import android.widget.Toast
 import androidx.annotation.RequiresApi
-import androidx.core.view.MotionEventCompat
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.example.washcar.R
 import com.example.washcar.WashCarApplication
-import com.example.washcar.api.customer.model.CustomerRequest
 import com.example.washcar.databinding.FragmentCadastroClienteBinding
-import com.example.washcar.registerFragment.RegisterViewModel
 
 class CadastroClienteFragment : Fragment() {
     lateinit var binding: FragmentCadastroClienteBinding
@@ -41,11 +38,19 @@ class CadastroClienteFragment : Fragment() {
         viewmodelCadastroCliente = ViewModelProvider(this, factory).get(CadastroClienteFragmentViewModel::class.java)
         binding.viewModel = viewmodelCadastroCliente
 
+        //get values of create customer
+        val nomeCompleto : Editable? = binding.textFieldNomeCompletoCliente.text
+        val email : Editable? = binding.textInputEditTextEmail.text
+        val cpf  : Editable? = binding.textInputEditTextCpf.text
+        val phoneNumber  : Editable? =  binding.textInputEditTextPhoneNumber.text
+        val cep  : Editable? = binding.textInputEditTextCep.text
+
+
         //val customerCreated = CustomerRequest(binding.textFieldNomeCompletoCliente.text.toString(),binding.textInputEditTextEmail.text.toString(),binding.textInputEditTextCpf.text.toString(),binding.textInputEditTextPhoneNumber.text.toString(), binding.textInputEditTextCpf.text.toString())
 
         binding.button.setOnClickListener {
-            //viewmodelCadastroCliente.createCustomer(customerCreated)
-            Log.i("customer","${binding.textFieldNomeCompletoCliente.text.toString()}")
+            viewmodelCadastroCliente.createCustomer(viewmodelCadastroCliente.customerRequest.value)
+            Log.i("customer", "${binding.textFieldNomeCompletoCliente.text}, ${nomeCompleto.toString()}, ${binding.textInputEditTextEmail.text}, ${email.toString()}, customer: ${viewmodelCadastroCliente.customerRequest.value!!.email}")
         }
 
         viewmodelCadastroCliente.createCustomerStatus.observe(viewLifecycleOwner, Observer {

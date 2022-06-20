@@ -6,7 +6,6 @@ import com.example.washcar.api.customer.model.CustomerResponse
 import com.example.washcar.api.user.model.UserRequest
 import com.example.washcar.api.user.model.UserResponse
 import retrofit2.Call
-import retrofit2.Response
 
 
 class RemoteRepository {
@@ -15,7 +14,7 @@ class RemoteRepository {
             return  RetrofitInstance.userApi.createUser(userRequest)
         }
 
-    fun createCustomer(customerRequest: CustomerRequest) : Call<CustomerResponse>{
+    fun createCustomer(customerRequest: CustomerRequest?) : Call<CustomerResponse>{
         return RetrofitInstance.customerApi.createCustomer(customerRequest)
     }
 
