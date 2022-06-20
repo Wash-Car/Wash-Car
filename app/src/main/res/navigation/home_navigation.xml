@@ -20,5 +20,18 @@ tools:layout="@layout/fragment_blank" />
         android:id="@+id/cadastroClienteFragment"
         android:name="com.example.washcar.cadastrarClienteFragment.CadastroClienteFragment"
         android:label="fragment_cadastro_cliente"
-        tools:layout="@layout/fragment_cadastro_cliente" />
+        tools:layout="@layout/fragment_cadastro_cliente" >
+        <action
+            android:id="@+id/action_cadastroClienteFragment_to_cadastraCarroFragment"
+            app:destination="@id/cadastraCarroFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/cadastraCarroFragment"
+        android:name="com.example.washcar.CadastraCarroFragment"
+        android:label="fragment_cadastra_carro"
+        tools:layout="@layout/fragment_cadastra_carro" >
+        <action
+            android:id="@+id/action_cadastraCarroFragment_to_cadastroClienteFragment"
+            app:destination="@id/cadastroClienteFragment" />
+    </fragment>
 </navigation>
