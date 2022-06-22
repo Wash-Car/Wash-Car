@@ -15,6 +15,7 @@ import android.widget.Toast
 import androidx.core.widget.addTextChangedListener
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
@@ -28,9 +29,11 @@ import com.example.washcar.ui.login.SessionManager
 
 class RegisterFragment : Fragment() {
 
+    val viewModel: RegisterViewModel by viewModels()
     lateinit var binding: FragmentRegisterBinding
 
-    lateinit var viewModel: RegisterViewModel
+
+
 
 
 
@@ -54,14 +57,6 @@ class RegisterFragment : Fragment() {
 
 
 
-
-
-
-
-
-        val factory = RegisterViewModel.Factory((requireActivity().application as WashCarApplication).remoteRepository)
-
-        viewModel = ViewModelProvider(this, factory).get(RegisterViewModel::class.java)
         binding.viewmodel = viewModel
         binding.lifecycleOwner = viewLifecycleOwner
 

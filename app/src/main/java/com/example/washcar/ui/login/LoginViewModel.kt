@@ -1,11 +1,8 @@
 package com.example.washcar.ui.login
 
 import android.util.Log
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
 import android.util.Patterns
-import androidx.lifecycle.viewModelScope
+import androidx.lifecycle.*
 import com.example.washcar.data.LoginRepository
 
 import com.example.washcar.R
@@ -16,7 +13,7 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
-class LoginViewModel(private val loginRepository: LoginRepository) : ViewModel() {
+class LoginViewModel(private val loginRepository: LoginRepository, private val state: SavedStateHandle) : ViewModel() {
 
     private val _loginForm = MutableLiveData<LoginFormState>()
     val loginFormState: LiveData<LoginFormState> = _loginForm
@@ -26,6 +23,10 @@ class LoginViewModel(private val loginRepository: LoginRepository) : ViewModel()
 
     private val _loginStatus = MutableLiveData<Boolean>()
     val loginStatus: LiveData<Boolean> = _loginStatus
+
+
+    val userToken : LiveData<String> =
+        state.getLiveData("userToken")
 
     fun setStatusFalse(){
         _loginStatus.value = false
@@ -49,6 +50,7 @@ class LoginViewModel(private val loginRepository: LoginRepository) : ViewModel()
                        Log.i("responses", "${_loginStatus.value}")
                        _loginResult.value =
                            LoginResult(success = response.body())
+                           saveUserLogged(response.body())
 
                    }else if(response.code() == 401){
                        _loginStatus.value = false
@@ -71,6 +73,12 @@ class LoginViewModel(private val loginRepository: LoginRepository) : ViewModel()
 
        }
 
+    }
+
+    fun saveUserLogged(loginResponse: LoginResponse?){
+        if (loginResponse != null) {
+            state["userToken"] = loginResponse.accessToken
+        }
     }
 
     fun loginDataChanged(username: String, password: String) {
