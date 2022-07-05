@@ -8,12 +8,15 @@ import com.example.washcar.data.LoginRepository
 import com.example.washcar.R
 import com.example.washcar.api.auth.model.LoginRequest
 import com.example.washcar.api.auth.model.LoginResponse
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
+import javax.inject.Inject
 
-class LoginViewModel(private val loginRepository: LoginRepository, private val state: SavedStateHandle) : ViewModel() {
+@HiltViewModel
+class LoginViewModel @Inject constructor (private val loginRepository: LoginRepository, private val state: SavedStateHandle) : ViewModel() {
 
     private val _loginForm = MutableLiveData<LoginFormState>()
     val loginFormState: LiveData<LoginFormState> = _loginForm
