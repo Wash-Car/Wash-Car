@@ -3,15 +3,32 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
-        <entry key="..\:/Users/Bolsista/AndroidStudioProjects/Wash-Car/app/src/main/res/layout/activity_main.xml" value="0.358695652173913" />
-        <entry key="..\:/Users/Bolsista/AndroidStudioProjects/Wash-Car/app/src/main/res/layout/fragment_blank.xml" value="0.358695652173913" />
+        <entry key="..\:/Users/Bolsista/AndroidStudioProjects/Wash-Car/app/src/main/res/drawable-v24/baseline_home_20.xml" value="0.292" />
+        <entry key="..\:/Users/Bolsista/AndroidStudioProjects/Wash-Car/app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.196" />
+        <entry key="..\:/Users/Bolsista/AndroidStudioProjects/Wash-Car/app/src/main/res/drawable/ic_launcher_background.xml" value="0.196" />
+        <entry key="..\:/Users/Bolsista/AndroidStudioProjects/Wash-Car/app/src/main/res/layout/activity_login.xml" value="0.18802083333333333" />
+        <entry key="..\:/Users/Bolsista/AndroidStudioProjects/Wash-Car/app/src/main/res/layout/activity_main.xml" value="0.25" />
+        <entry key="..\:/Users/Bolsista/AndroidStudioProjects/Wash-Car/app/src/main/res/layout/bottom_navigation.xml" value="0.28802083333333334" />
+        <entry key="..\:/Users/Bolsista/AndroidStudioProjects/Wash-Car/app/src/main/res/layout/fragment_blank.xml" value="0.25" />
+        <entry key="..\:/Users/Bolsista/AndroidStudioProjects/Wash-Car/app/src/main/res/layout/fragment_cadastra_carro.xml" value="0.36666666666666664" />
+        <entry key="..\:/Users/Bolsista/AndroidStudioProjects/Wash-Car/app/src/main/res/layout/fragment_cadastro_cliente.xml" value="0.36666666666666664" />
+        <entry key="..\:/Users/Bolsista/AndroidStudioProjects/Wash-Car/app/src/main/res/layout/fragment_lavagem.xml" value="0.36666666666666664" />
         <entry key="..\:/Users/Bolsista/AndroidStudioProjects/Wash-Car/app/src/main/res/layout/fragment_login.xml" value="0.358695652173913" />
+        <entry key="..\:/Users/Bolsista/AndroidStudioProjects/Wash-Car/app/src/main/res/layout/fragment_register.xml" value="0.18802083333333333" />
+        <entry key="..\:/Users/Bolsista/AndroidStudioProjects/Wash-Car/app/src/main/res/layout/header_navigation_drawer.xml" value="0.30808080808080807" />
+        <entry key="..\:/Users/Bolsista/AndroidStudioProjects/Wash-Car/app/src/main/res/layout/lavagem_row.xml" value="0.33" />
+        <entry key="..\:/Users/Bolsista/AndroidStudioProjects/Wash-Car/app/src/main/res/layout/list_item_funcao.xml" value="0.36666666666666664" />
+        <entry key="..\:/Users/Bolsista/AndroidStudioProjects/Wash-Car/app/src/main/res/layout/list_item_marca.xml" value="0.36666666666666664" />
+        <entry key="..\:/Users/Bolsista/AndroidStudioProjects/Wash-Car/app/src/main/res/menu/bottom_menu.xml" value="0.18802083333333333" />
+        <entry key="..\:/Users/Bolsista/AndroidStudioProjects/Wash-Car/app/src/main/res/menu/bottom_navigation_menu.xml" value="0.28802083333333334" />
+        <entry key="..\:/Users/Bolsista/AndroidStudioProjects/Wash-Car/app/src/main/res/menu/navigation_drawer.xml" value="0.8822055137844611" />
         <entry key="..\:/Users/Bolsista/AndroidStudioProjects/Wash-Car/app/src/main/res/xml/network_security_config.xml" value="0.18802083333333333" />
         <entry key="..\:/Users/filip/AndroidStudioProjects/WashCar/app/src/main/res/layout/activity_main.xml" value="0.25" />
         <entry key="..\:/Users/filip/AndroidStudioProjects/WashCar/app/src/main/res/layout/fragment_blank.xml" value="0.209375" />
+        <entry key="..\:/Users/filip/AndroidStudioProjects/WashCar/app/src/main/res/layout/fragment_cadastro_cliente.xml" value="0.25" />
         <entry key="..\:/Users/filip/AndroidStudioProjects/WashCar/app/src/main/res/layout/fragment_login.xml" value="0.25" />
         <entry key="..\:/Users/filip/AndroidStudioProjects/WashCar/app/src/main/res/layout/fragment_register.xml" value="0.1" />
-        <entry key="..\:/Users/filip/AndroidStudioProjects/WashCar/app/src/main/res/layout/header_navigation_drawer.xml" value="0.209375" />
+        <entry key="..\:/Users/filip/AndroidStudioProjects/WashCar/app/src/main/res/menu/bottom_menu.xml" value="0.13703703703703704" />
       </map>
     </option>
   </component>

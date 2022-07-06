@@ -21,10 +21,10 @@
             android:layout_marginStart="24dp"
             android:layout_marginEnd="24dp"
             android:textAppearance="?attr/textAppearanceHeadline6"
-            android:text="@={viewmodel.nome}" />
+            android:text="@{viewmodel.nome, default=Nome}" />
 
         <TextView
-            android:id="@+id/textViewNickName"
+            android:id="@+id/textViewEmail"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="24dp"
@@ -32,7 +32,7 @@
             android:layout_marginEnd="24dp"
             android:textAppearance="?attr/textAppearanceBody2"
             android:textColor="@color/material_on_surface_emphasis_medium"
-            android:text="NickName" />
+            android:text="@{viewmodel.nome, default=Nome}" />
 
     </LinearLayout>
 </layout>

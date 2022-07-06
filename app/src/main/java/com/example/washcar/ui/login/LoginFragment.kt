@@ -1,5 +1,6 @@
 package com.example.washcar.ui.login
 
+import android.content.Intent
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
@@ -10,9 +11,11 @@ import android.view.ViewGroup
 import android.view.inputmethod.EditorInfo
 import android.widget.Toast
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
+import com.example.washcar.MainActivity
 import com.example.washcar.R
 import com.example.washcar.api.auth.model.LoginResponse
 import com.example.washcar.databinding.FragmentLoginBinding
@@ -27,7 +30,7 @@ class LoginFragment : Fragment() {
     private lateinit var auth: FirebaseAuth
     private lateinit var sessionManager: SessionManager
 
-    private lateinit var loginViewModel: LoginViewModel
+    val loginViewModel: LoginViewModel by viewModels()
     private var _binding: FragmentLoginBinding? = null
 
     // This property is only valid between onCreateView and
@@ -72,8 +75,8 @@ class LoginFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        loginViewModel = ViewModelProvider(this, LoginViewModelFactory())
-            .get(LoginViewModel::class.java)
+
+
 
         val usernameEditText = binding.username
         val passwordEditText = binding.password
@@ -100,8 +103,13 @@ class LoginFragment : Fragment() {
                 loadingProgressBar.visibility = View.GONE
                 showLoginFailed(loginResult.error)
                 loginResult.success?.let {
+                    Log.i("responses", "entrou no observer de loginResult")
                     updateUiWithUser(it)
-                    saveUserLogin(it.accessToken, it.id)
+
+                    saveUserLogin(it.accessToken)
+                    loginViewModel.userToken.observe(viewLifecycleOwner, Observer { userToken ->
+                        Toast.makeText(requireContext(), userToken, Toast.LENGTH_LONG).show()
+                    })
 
                 }
             })
@@ -136,27 +144,24 @@ class LoginFragment : Fragment() {
 
         loginButton.setOnClickListener {
             loadingProgressBar.visibility = View.VISIBLE
-            loginViewModel.login(
-                usernameEditText.text.toString(),
-                passwordEditText.text.toString()
-            )
-            //findNavController().navigate(R.id.action_loginFragment2_to_blankFragment)
+            Log.i("responses", "${usernameEditText.text.toString()}, ${passwordEditText.text.toString()}")
+
+//            loginViewModel.login(usernameEditText.text.toString(), passwordEditText.text.toString())
+//
+
+            loginViewModel.login(usernameEditText.text.toString(), passwordEditText.text.toString())
             loginViewModel.loginStatus.observe(viewLifecycleOwner, Observer {
                 if (it){
-                    Log.i("loginStatus", "$it")
-                    findNavController().navigate(R.id.action_loginFragment2_to_blankFragment)
-                    loginViewModel.setStatusFalse()
+                    Log.i("responses", "$it")
+                    //findNavController().navigate(R.id.action_loginFragment2_to_mainActivity)
+                    startActivity(Intent(requireContext(), MainActivity::class.java))
 
+
+                }else{
+                    Log.i("responses", "email e/ou senha incorretos")
                 }
-                Log.i("loginStatus", "$it")
             })
-//            if(loginViewModel.loginStatus.value == true){
-//                findNavController().navigate(R.id.action_loginFragment2_to_blankFragment)
-//            }
 
-
-
-            //signIn(usernameEditText.text.toString(), passwordEditText.text.toString())
 
 
         }
@@ -199,14 +204,11 @@ class LoginFragment : Fragment() {
             }
         }
     }
-    private fun signIn(email: String, password: String) {
-        loginViewModel.login(email,password)
-        loginViewModel.loginResult.observe(viewLifecycleOwner, Observer {
-            //findNavController().navigate(R.id.action_loginFragment2_to_blankFragment)
-        })
-
-
-    }
+//    private fun signIn(email: String, password: String) {
+//
+//        loginViewModel.login(email,password)
+//
+//    }
 
     // Nao usar, pq para qualquer usuario digitado ele eh dado como aceito
     private fun updateUiWithUser(model: LoginResponse) {
@@ -218,10 +220,10 @@ class LoginFragment : Fragment() {
 
     }
 
-    private fun saveUserLogin(token: String, id: Int) {
-        Log.i("UserLogin", "id:$id, $token")
+    private fun saveUserLogin(token: String) {
+        Log.i("UserLogin", "$token")
         sessionManager.saveAuthToken(token)
-        sessionManager.saveUserId(id)
+        //sessionManager.saveUserId(id)
 
     }
 

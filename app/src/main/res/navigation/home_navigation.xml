@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/home_navigation"
+    app:startDestination="@id/blankFragment">
+
+
+<fragment
+android:id="@+id/blankFragment"
+android:name="com.example.washcar.homeFragment.HomeFragment"
+android:label="Home"
+tools:layout="@layout/fragment_blank" />
+    <fragment
+        android:id="@+id/lavagemFragment"
+        android:name="com.example.washcar.LavagemFragment"
+        android:label="fragment_lavagem"
+        tools:layout="@layout/fragment_lavagem" />
+    <fragment
+        android:id="@+id/cadastroClienteFragment"
+        android:name="com.example.washcar.cadastrarClienteFragment.CadastroClienteFragment"
+        android:label="fragment_cadastro_cliente"
+        tools:layout="@layout/fragment_cadastro_cliente" >
+        <action
+            android:id="@+id/action_cadastroClienteFragment_to_cadastraCarroFragment"
+            app:destination="@id/cadastraCarroFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/cadastraCarroFragment"
+        android:name="com.example.washcar.CadastraCarroFragment"
+        android:label="fragment_cadastra_carro"
+        tools:layout="@layout/fragment_cadastra_carro" >
+        <action
+            android:id="@+id/action_cadastraCarroFragment_to_cadastroClienteFragment"
+            app:destination="@id/cadastroClienteFragment" />
+    </fragment>
+</navigation>

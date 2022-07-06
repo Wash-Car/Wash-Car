@@ -1,22 +1,22 @@
 package com.example.washcar.ui.login
 
 import android.util.Log
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
 import android.util.Patterns
-import androidx.lifecycle.viewModelScope
+import androidx.lifecycle.*
 import com.example.washcar.data.LoginRepository
 
 import com.example.washcar.R
 import com.example.washcar.api.auth.model.LoginRequest
 import com.example.washcar.api.auth.model.LoginResponse
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
+import javax.inject.Inject
 
-class LoginViewModel(private val loginRepository: LoginRepository) : ViewModel() {
+@HiltViewModel
+class LoginViewModel @Inject constructor (private val loginRepository: LoginRepository, private val state: SavedStateHandle) : ViewModel() {
 
     private val _loginForm = MutableLiveData<LoginFormState>()
     val loginFormState: LiveData<LoginFormState> = _loginForm
@@ -27,6 +27,10 @@ class LoginViewModel(private val loginRepository: LoginRepository) : ViewModel()
     private val _loginStatus = MutableLiveData<Boolean>()
     val loginStatus: LiveData<Boolean> = _loginStatus
 
+
+    val userToken : LiveData<String> =
+        state.getLiveData("userToken")
+
     fun setStatusFalse(){
         _loginStatus.value = false
     }
@@ -36,20 +40,25 @@ class LoginViewModel(private val loginRepository: LoginRepository) : ViewModel()
 
            val login = LoginRequest(email,password)
            val response = loginRepository.login(login)
+           //_loginStatus.value = true
            response.enqueue(object : Callback<LoginResponse>{
 
                override fun onResponse(
                    call: Call<LoginResponse>,
                    response: Response<LoginResponse>
                ) {
-                   if (response.code() == 200){
+                   if (response.code() == 201){
                        _loginStatus.value = true
-                       //Log.i("responsee", "${response.body()}")
+                       Log.i("responses", "${response.code()}")
+                       Log.i("responses", "${_loginStatus.value}")
                        _loginResult.value =
                            LoginResult(success = response.body())
+                           saveUserLogged(response.body())
 
                    }else if(response.code() == 401){
                        _loginStatus.value = false
+                       Log.i("responses", "${response.code()}")
+                       Log.i("responses", "${_loginStatus.value}")
                        _loginResult.value = LoginResult(error = "Email e/ou senha incorretos")
 
                    }
@@ -67,6 +76,12 @@ class LoginViewModel(private val loginRepository: LoginRepository) : ViewModel()
 
        }
 
+    }
+
+    fun saveUserLogged(loginResponse: LoginResponse?){
+        if (loginResponse != null) {
+            state["userToken"] = loginResponse.accessToken
+        }
     }
 
     fun loginDataChanged(username: String, password: String) {

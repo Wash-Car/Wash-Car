@@ -10,6 +10,6 @@ import retrofit2.http.Headers
 import retrofit2.http.POST
 
 interface UserApi {
-    @POST("user")
-   suspend fun createUser(@Body userRequest: UserRequest) : Response<UserResponse>
+    @POST("users")
+   fun createUser(@Body userRequest: UserRequest) : Call<UserResponse>
 }
