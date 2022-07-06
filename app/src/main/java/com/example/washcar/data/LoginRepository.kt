@@ -4,7 +4,7 @@ import com.example.washcar.api.RetrofitInstance
 import com.example.washcar.api.auth.model.LoginRequest
 import com.example.washcar.api.auth.model.LoginResponse
 import com.example.washcar.data.model.LoggedInUser
-import dagger.hilt.android.AndroidEntryPoint
+
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -14,7 +14,7 @@ import retrofit2.Response
  * maintains an in-memory cache of login status and user credentials information.
  */
 
-class LoginRepository() {
+class LoginRepository(dataSource: LoginDataSource) {
     private lateinit var result : LoginResponse
 
     // in-memory cache of the loggedInUser object

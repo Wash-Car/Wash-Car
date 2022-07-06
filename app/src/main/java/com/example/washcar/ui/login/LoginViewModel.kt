@@ -8,15 +8,15 @@ import com.example.washcar.data.LoginRepository
 import com.example.washcar.R
 import com.example.washcar.api.auth.model.LoginRequest
 import com.example.washcar.api.auth.model.LoginResponse
-import dagger.hilt.android.lifecycle.HiltViewModel
+
 import kotlinx.coroutines.launch
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
-import javax.inject.Inject
 
-@HiltViewModel
-class LoginViewModel @Inject constructor (private val loginRepository: LoginRepository, private val state: SavedStateHandle) : ViewModel() {
+
+
+class LoginViewModel (private val loginRepository: LoginRepository) : ViewModel() {
 
     private val _loginForm = MutableLiveData<LoginFormState>()
     val loginFormState: LiveData<LoginFormState> = _loginForm
@@ -27,9 +27,6 @@ class LoginViewModel @Inject constructor (private val loginRepository: LoginRepo
     private val _loginStatus = MutableLiveData<Boolean>()
     val loginStatus: LiveData<Boolean> = _loginStatus
 
-
-    val userToken : LiveData<String> =
-        state.getLiveData("userToken")
 
     fun setStatusFalse(){
         _loginStatus.value = false
@@ -47,13 +44,13 @@ class LoginViewModel @Inject constructor (private val loginRepository: LoginRepo
                    call: Call<LoginResponse>,
                    response: Response<LoginResponse>
                ) {
-                   if (response.code() == 201){
+                   if (response.code() == 200){
                        _loginStatus.value = true
                        Log.i("responses", "${response.code()}")
                        Log.i("responses", "${_loginStatus.value}")
                        _loginResult.value =
                            LoginResult(success = response.body())
-                           saveUserLogged(response.body())
+                          // saveUserLogged(response.body())
 
                    }else if(response.code() == 401){
                        _loginStatus.value = false
@@ -78,11 +75,6 @@ class LoginViewModel @Inject constructor (private val loginRepository: LoginRepo
 
     }
 
-    fun saveUserLogged(loginResponse: LoginResponse?){
-        if (loginResponse != null) {
-            state["userToken"] = loginResponse.accessToken
-        }
-    }
 
     fun loginDataChanged(username: String, password: String) {
         if (!isUserNameValid(username)) {

@@ -30,7 +30,7 @@ class LoginFragment : Fragment() {
     private lateinit var auth: FirebaseAuth
     private lateinit var sessionManager: SessionManager
 
-    val loginViewModel: LoginViewModel by viewModels()
+    lateinit var loginViewModel: LoginViewModel
     private var _binding: FragmentLoginBinding? = null
 
     // This property is only valid between onCreateView and
@@ -43,6 +43,8 @@ class LoginFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         _binding = FragmentLoginBinding.inflate(inflater, container, false)
+        loginViewModel = ViewModelProvider(this, LoginViewModelFactory())
+            .get(LoginViewModel::class.java)
 
         auth = Firebase.auth
 
@@ -106,10 +108,10 @@ class LoginFragment : Fragment() {
                     Log.i("responses", "entrou no observer de loginResult")
                     updateUiWithUser(it)
 
-                    saveUserLogin(it.accessToken)
-                    loginViewModel.userToken.observe(viewLifecycleOwner, Observer { userToken ->
-                        Toast.makeText(requireContext(), userToken, Toast.LENGTH_LONG).show()
-                    })
+//                    saveUserLogin(it.accessToken)
+//                    //loginViewModel.userToken.observe(viewLifecycleOwner, Observer { userToken ->
+//                        Toast.makeText(requireContext(), userToken, Toast.LENGTH_LONG).show()
+//                    })
 
                 }
             })

@@ -13,7 +13,7 @@ import retrofit2.Callback
 import retrofit2.Response
 
 
-class RegisterViewModel constructor (remoteRepository: RemoteRepository, private val savedStateHandle: SavedStateHandle) : ViewModel() {
+class RegisterViewModel(remoteRepository: RemoteRepository) : ViewModel() {
 
     //var myResponse: MutableLiveData<Call<UserResponse>> = MutableLiveData()
     var status : MutableLiveData<Boolean> = MutableLiveData()

@@ -14,19 +14,20 @@ import androidx.navigation.ui.NavigationUI
 import androidx.navigation.ui.setupWithNavController
 import com.example.washcar.databinding.ActivityLoginBinding
 import com.example.washcar.ui.login.LoginViewModel
-import dagger.hilt.android.AndroidEntryPoint
+import com.example.washcar.ui.login.LoginViewModelFactory
 
-@AndroidEntryPoint
+
+
 class LoginActivity : AppCompatActivity() {
 
     lateinit var binding: ActivityLoginBinding
-    val loginViewModel: LoginViewModel by viewModels()
+    lateinit var loginViewModel: LoginViewModel
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
         binding = DataBindingUtil.setContentView(this, R.layout.activity_login)
-//        loginViewModel = ViewModelProvider(this, LoginViewModelFactory())
-//            .get(LoginViewModel::class.java)
+        loginViewModel = ViewModelProvider(this, LoginViewModelFactory())
+            .get(LoginViewModel::class.java)
 
         setContentView(binding.root)
 

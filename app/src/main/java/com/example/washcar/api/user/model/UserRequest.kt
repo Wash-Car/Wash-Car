@@ -7,14 +7,17 @@ data class UserRequest (
     var email : String,
     @SerializedName("password")
     var password : String,
-    @SerializedName("completeName")
+    @SerializedName("nomeCompleto")
     var name: String?,
 //    @SerializedName("completeName")
 //    var username: String,
-    @SerializedName("phoneNumber")
+    @SerializedName("telefone")
     var telefone: String,
-    @SerializedName("jobFuncion")
-    var funcao: String
+    @SerializedName("funcao")
+    var funcao: String,
+
+
+
 ){
     constructor() :this("", "", "", "", "")
 }

@@ -29,7 +29,7 @@ import com.example.washcar.ui.login.SessionManager
 
 class RegisterFragment : Fragment() {
 
-    val viewModel: RegisterViewModel by viewModels()
+    lateinit var viewModel: RegisterViewModel
     lateinit var binding: FragmentRegisterBinding
 
 
@@ -46,6 +46,7 @@ class RegisterFragment : Fragment() {
 
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_register,container, false)
 
+        viewModel = ViewModelProvider(this, RegisterViewModelFactory()).get(RegisterViewModel::class.java)
 
 
         var senha = binding.textFieldSenha.text

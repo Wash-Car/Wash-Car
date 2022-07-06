@@ -6,6 +6,6 @@ import retrofit2.http.Body
 import retrofit2.http.POST
 
 interface CustomerApi {
-    @POST("customer")
+    @POST("cliente")
     fun createCustomer(@Body customerRequest: CustomerRequest?) : Call<CustomerResponse>
 }

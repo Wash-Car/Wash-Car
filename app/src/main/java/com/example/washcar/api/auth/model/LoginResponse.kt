@@ -5,6 +5,6 @@ import com.google.gson.annotations.SerializedName
 data class LoginResponse(
 //    @SerializedName("id")
 //    var id: Int,
-    @SerializedName("token")
+    @SerializedName("access_token")
     var accessToken : String
 )

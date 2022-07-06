@@ -191,7 +191,7 @@
                     android:layout_height="wrap_content"
                     app:mask="+55 (__) _____-____"
                     android:hint="Telefone"
-                    android:text="@={viewModel.customerRequest.phoneNumber}"
+
                     />
 
             </com.google.android.material.textfield.TextInputLayout>

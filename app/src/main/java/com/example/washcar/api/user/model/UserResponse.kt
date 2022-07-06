@@ -4,20 +4,24 @@ import com.google.gson.annotations.SerializedName
 
 data class UserResponse(
 
-    @SerializedName("completeName")
-    var name : String,
-
     @SerializedName("email")
     var email : String,
-
-    @SerializedName("phoneNumber")
-    var telefone : String,
-
-    @SerializedName("jobFuncion")
-    var funcao : String,
+    @SerializedName("password")
+    var password : String,
+    @SerializedName("nomeCompleto")
+    var name: String?,
+//    @SerializedName("completeName")
+//    var username: String,
+    @SerializedName("telefone")
+    var telefone: String,
+    @SerializedName("funcao")
+    var funcao: String,
 
     @SerializedName("id")
     var id : String,
+
+    @SerializedName("statusUser")
+    var statusUser : Boolean
 ){
-    constructor() :this("", "", "", "", "")
+    constructor() :this("", "", "", "", "", "", false)
 }
