@@ -11,6 +11,7 @@ import android.view.ViewGroup
 import android.view.inputmethod.EditorInfo
 import android.widget.Toast
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
@@ -29,7 +30,7 @@ class LoginFragment : Fragment() {
     private lateinit var auth: FirebaseAuth
     private lateinit var sessionManager: SessionManager
 
-    private lateinit var loginViewModel: LoginViewModel
+    val loginViewModel: LoginViewModel by viewModels()
     private var _binding: FragmentLoginBinding? = null
 
     // This property is only valid between onCreateView and
@@ -74,8 +75,8 @@ class LoginFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        loginViewModel = ViewModelProvider(this, LoginViewModelFactory())
-            .get(LoginViewModel::class.java)
+
+
 
         val usernameEditText = binding.username
         val passwordEditText = binding.password
@@ -104,7 +105,11 @@ class LoginFragment : Fragment() {
                 loginResult.success?.let {
                     Log.i("responses", "entrou no observer de loginResult")
                     updateUiWithUser(it)
+
                     saveUserLogin(it.accessToken)
+                    loginViewModel.userToken.observe(viewLifecycleOwner, Observer { userToken ->
+                        Toast.makeText(requireContext(), userToken, Toast.LENGTH_LONG).show()
+                    })
 
                 }
             })
