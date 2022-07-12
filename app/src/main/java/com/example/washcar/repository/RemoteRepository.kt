@@ -14,8 +14,8 @@ class RemoteRepository {
             return  RetrofitInstance.userApi.createUser(userRequest)
         }
 
-    fun createCustomer(customerRequest: CustomerRequest?) : Call<CustomerResponse>{
-        return RetrofitInstance.customerApi.createCustomer(customerRequest)
+    fun createCustomer(customerRequest: CustomerRequest?, authorization: String?) : Call<CustomerResponse>{
+        return RetrofitInstance.customerApi.createCustomer(customerRequest, authorization)
     }
 
 

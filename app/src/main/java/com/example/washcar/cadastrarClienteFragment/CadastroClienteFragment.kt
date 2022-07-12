@@ -1,6 +1,7 @@
 package com.example.washcar.cadastrarClienteFragment
 
 import android.content.Context
+import android.content.SharedPreferences
 import android.os.Build
 import android.os.Bundle
 import android.text.Editable
@@ -34,6 +35,8 @@ class CadastroClienteFragment : Fragment() {
             R.layout.fragment_cadastro_cliente,container, false)
 
 
+
+
         val factory = CadastroClienteFragmentViewModel.Factory((requireActivity().application as WashCarApplication).remoteRepository)
         viewmodelCadastroCliente = ViewModelProvider(this, factory).get(CadastroClienteFragmentViewModel::class.java)
         binding.viewModel = viewmodelCadastroCliente
@@ -48,8 +51,11 @@ class CadastroClienteFragment : Fragment() {
 
         //val customerCreated = CustomerRequest(binding.textFieldNomeCompletoCliente.text.toString(),binding.textInputEditTextEmail.text.toString(),binding.textInputEditTextCpf.text.toString(),binding.textInputEditTextPhoneNumber.text.toString(), binding.textInputEditTextCpf.text.toString())
 
+        val sharedPreferences : SharedPreferences = requireActivity().getSharedPreferences("washCar", Context.MODE_PRIVATE)
+        val accessToken = sharedPreferences.getString("accessToken", "naoVeioToken")
         binding.button.setOnClickListener {
-            viewmodelCadastroCliente.createCustomer(viewmodelCadastroCliente.customerRequest.value)
+            Log.i("tokenCliente", "$accessToken")
+            viewmodelCadastroCliente.createCustomer(viewmodelCadastroCliente.customerRequest.value, accessToken)
             Log.i("customer", "${binding.textFieldNomeCompletoCliente.text}, ${nomeCompleto.toString()}, ${binding.textInputEditTextEmail.text}, ${email.toString()}, customer: ${viewmodelCadastroCliente.customerRequest.value!!.email}")
         }
 

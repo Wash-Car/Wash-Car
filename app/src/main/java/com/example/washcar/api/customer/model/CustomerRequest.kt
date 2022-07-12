@@ -9,8 +9,6 @@ data class CustomerRequest(
     var email : String = "",
     @SerializedName("cpf")
     var cpf : String = "",
-//    @SerializedName("phoneNumber")
-//    var phoneNumber : String = "",
     @SerializedName("cep")
     var cep : String = ""
     ){

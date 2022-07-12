@@ -31,9 +31,9 @@ class CadastroClienteFragmentViewModel(remoteRepository: RemoteRepository) : Vie
 
 
 
-    fun createCustomer(customerRequest: CustomerRequest?) {
+    fun createCustomer(customerRequest: CustomerRequest?, authorization: String?) {
         viewModelScope.launch {
-            var request = remoteRepository.createCustomer(customerRequest)
+            var request = remoteRepository.createCustomer(customerRequest, authorization)
             request.enqueue(object : Callback<CustomerResponse> {
                 override fun onResponse(
                     call: Call<CustomerResponse>,
