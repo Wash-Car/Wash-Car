@@ -24,7 +24,7 @@ class CadastraCarroFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_cadastra_carro,container, false)
-        viewModel = ViewModelProvider(this).get(CadastraCarroViewModel::class.java)
+        viewModel = ViewModelProvider(this, CadastraCarroViewModelFactory()).get(CadastraCarroViewModel::class.java)
         binding.viewModel = viewModel
 
 
