@@ -62,25 +62,25 @@ class CadastraCarroViewModel(private val remoteRepository: RemoteRepository) : V
 
     fun getAllCarModel(authorization : String?){
         viewModelScope.launch(Dispatchers.IO) {
-            _listCarModelResponse.value = remoteRepository.getAllCarModel(authorization)
+            _listCarModelResponse.postValue(remoteRepository.getAllCarModel(authorization))
         }
     }
 
     fun getCarModelById(authorization : String?, id : Int){
         viewModelScope.launch(Dispatchers.IO) {
-            _carModelByIdResponse.value = remoteRepository.getCarModelById(authorization, id)
+            _carModelByIdResponse.postValue(remoteRepository.getCarModelById(authorization, id))
         }
     }
 
     fun getAllManufacturer(authorization : String?){
         viewModelScope.launch(Dispatchers.IO) {
-            _listManufacturerResponse.value = remoteRepository.getAllManufacturer(authorization)
+            _listManufacturerResponse.postValue(remoteRepository.getAllManufacturer(authorization))
             }
         }
 
     fun getManufacturerById(authorization : String?, id : Int){
         viewModelScope.launch(Dispatchers.IO) {
-            _manufacturerByIdResponse.value = remoteRepository.getManufacturerById(authorization, id)
+            _manufacturerByIdResponse.postValue(remoteRepository.getManufacturerById(authorization, id))
         }
 
     }
