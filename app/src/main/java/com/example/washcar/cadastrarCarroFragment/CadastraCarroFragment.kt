@@ -14,6 +14,7 @@ import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.example.washcar.R
+import com.example.washcar.api.carModel.model.CarModelResponse
 import com.example.washcar.databinding.FragmentCadastraCarroBinding
 
 
@@ -34,42 +35,60 @@ class CadastraCarroFragment : Fragment() {
         val sharedPreferences : SharedPreferences = requireActivity().getSharedPreferences("washCar", Context.MODE_PRIVATE)
         val accessToken = sharedPreferences.getString("accessToken", "naoVeioToken")
 
+        val listNomeCarModel = mutableListOf<String>()
+
         viewModel.getAllCarModel(accessToken)
         viewModel.getAllManufacturer(accessToken)
 
 
         viewModel.listCarModelResponse.observe(viewLifecycleOwner, Observer {
             Log.i("listCarModel", "${viewModel.listCarModelResponse.value}")
+           // binding.autoCompleteCarModel.setAdapter(ArrayAdapter(requireContext(), R.layout.list_item_marca, it))
+
+            viewModel.listCarModelResponse.value?.forEach {
+                Log.i("names", it.carModel)
+                listNomeCarModel.add(it.carModel)
+            }
         })
 
-        val listNomeCarModel = mutableListOf<String>()
+        binding.autoCompleteCarModel.setOnItemClickListener { adapterView, view, i, l ->
+            val selectCarModel = adapterView.getItemAtPosition(i) as CarModelResponse
+            val carModelId = selectCarModel.id
+
+            Log.i("carModelId", "$carModelId")
+        }
+
+
 
         //listNomeCarModel.add(viewModel.listCarModelResponse.value)
 
 
 //        for (i in 0 until viewModel.listCarModelResponse.value!!.size){
-//            listNomeCarModel.add(viewModel.listCarModelResponse.value?.get(i)!!.carModel)
+//           Log.i("names", viewModel.listCarModelResponse.value?.get(0)!!.carModel)
 //        }
 
 
-        binding.button2.setOnClickListener {
-            viewModel.getAllCarModel(accessToken)
-            viewModel.getAllManufacturer(accessToken)
 
-            Log.i("listCarModelName", "${viewModel.listCarModelResponse.value?.get(0)!!.carModel} ${listNomeCarModel[0]}" )
-        }
+
+
+//        binding.button2.setOnClickListener {
+//            viewModel.getAllCarModel(accessToken)
+//            viewModel.getAllManufacturer(accessToken)
+//
+//            Log.i("listCarModelName", "${viewModel.listCarModelResponse.value?.get(0)!!.carModel} ${listNomeCarModel[0]}" )
+//        }
 
 
 
 
 
         // fazer lista com dados vindos da API e fazer um filter na busca
-        val items = listOf("Filipe")
+        val items = listNomeCarModel
         //val listNomeCarModel =
         val adapter = ArrayAdapter(requireContext(), R.layout.list_item_marca, items)
         (binding.autoCompleteCarModel as? AutoCompleteTextView)?.setAdapter(adapter)
-
-        // Inflate the layout for this fragment
+//
+//        // Inflate the layout for this fragment
         return binding.root
     }
 
