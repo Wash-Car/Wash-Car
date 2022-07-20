@@ -8,8 +8,10 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.AutoCompleteTextView
+import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
@@ -22,17 +24,23 @@ class CadastraCarroFragment : Fragment() {
 
     lateinit var binding: FragmentCadastraCarroBinding
     lateinit var viewModel: CadastraCarroViewModel
+    lateinit var autoCompleteAdapter: AutoCompleteAdapter
 
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        binding = DataBindingUtil.inflate(inflater, R.layout.fragment_cadastra_carro,container, false)
-        viewModel = ViewModelProvider(this, CadastraCarroViewModelFactory()).get(CadastraCarroViewModel::class.java)
+        binding =
+            DataBindingUtil.inflate(inflater, R.layout.fragment_cadastra_carro, container, false)
+        viewModel = ViewModelProvider(
+            this,
+            CadastraCarroViewModelFactory()
+        ).get(CadastraCarroViewModel::class.java)
         binding.viewModel = viewModel
 
-        val sharedPreferences : SharedPreferences = requireActivity().getSharedPreferences("washCar", Context.MODE_PRIVATE)
+        val sharedPreferences: SharedPreferences =
+            requireActivity().getSharedPreferences("washCar", Context.MODE_PRIVATE)
         val accessToken = sharedPreferences.getString("accessToken", "naoVeioToken")
 
         val listNomeCarModel = mutableListOf<String>()
@@ -41,23 +49,50 @@ class CadastraCarroFragment : Fragment() {
         viewModel.getAllManufacturer(accessToken)
 
 
+
+
         viewModel.listCarModelResponse.observe(viewLifecycleOwner, Observer {
             Log.i("listCarModel", "${viewModel.listCarModelResponse.value}")
-           // binding.autoCompleteCarModel.setAdapter(ArrayAdapter(requireContext(), R.layout.list_item_marca, it))
 
             viewModel.listCarModelResponse.value?.forEach {
                 Log.i("names", it.carModel)
                 listNomeCarModel.add(it.carModel)
             }
+
+            autoCompleteAdapter = AutoCompleteAdapter(
+                requireContext(),
+                R.layout.list_item_marca,
+                it,
+                listNomeCarModel
+            )
+            binding.autoCompleteCarModel.setAdapter(autoCompleteAdapter)
+
+            val onItemClickListener = binding.autoCompleteCarModel.onItemClickListener
+
+            Log.i("carModelId", "$onItemClickListener")
+
+
         })
 
-        binding.autoCompleteCarModel.setOnItemClickListener { adapterView, view, i, l ->
-            val selectCarModel = adapterView.getItemAtPosition(i) as CarModelResponse
-            val carModelId = selectCarModel.id
+//        binding.autoCompleteCarModel.setOnItemClickListener { adapterView, view, i, l ->
+//            val selectCarModel = adapterView.getItemAtPosition(i) as CarModelResponse
+//            val carModelId = selectCarModel.id
+//
+//
+//        }
 
-            Log.i("carModelId", "$carModelId")
-        }
+        binding.autoCompleteCarModel.setOnItemClickListener(AdapterView.OnItemClickListener { adapterView, view, i, l ->
+            Toast.makeText(
+                requireContext(), "${
+                    autoCompleteAdapter.getIdItem(
+                        i
 
+                    )
+                }", Toast.LENGTH_LONG
+            ).show()
+
+
+        })
 
 
         //listNomeCarModel.add(viewModel.listCarModelResponse.value)
@@ -68,9 +103,6 @@ class CadastraCarroFragment : Fragment() {
 //        }
 
 
-
-
-
 //        binding.button2.setOnClickListener {
 //            viewModel.getAllCarModel(accessToken)
 //            viewModel.getAllManufacturer(accessToken)
@@ -79,16 +111,13 @@ class CadastraCarroFragment : Fragment() {
 //        }
 
 
-
-
-
-        // fazer lista com dados vindos da API e fazer um filter na busca
-        val items = listNomeCarModel
-        //val listNomeCarModel =
-        val adapter = ArrayAdapter(requireContext(), R.layout.list_item_marca, items)
-        (binding.autoCompleteCarModel as? AutoCompleteTextView)?.setAdapter(adapter)
-//
-//        // Inflate the layout for this fragment
+//        // fazer lista com dados vindos da API e fazer um filter na busca
+//        val items = listNomeCarModel
+//        //val listNomeCarModel =
+//        val adapter = ArrayAdapter(requireContext(), R.layout.list_item_marca, items)
+//        (binding.autoCompleteCarModel as? AutoCompleteTextView)?.setAdapter(adapter)
+////
+////        // Inflate the layout for this fragment
         return binding.root
     }
 
