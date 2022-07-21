@@ -15,8 +15,10 @@ import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
 import com.example.washcar.R
 import com.example.washcar.WashCarApplication
+import com.example.washcar.cadastrarCarroFragment.CadastraCarroFragmentDirections
 import com.example.washcar.databinding.FragmentCadastroClienteBinding
 
 class CadastroClienteFragment : Fragment() {
@@ -61,7 +63,15 @@ class CadastroClienteFragment : Fragment() {
 
         viewmodelCadastroCliente.createCustomerStatus.observe(viewLifecycleOwner, Observer {
             if (it){
+                val customerResponse = viewmodelCadastroCliente.customerResponse.value
+
+
                 Toast.makeText(requireContext(), "Cliente Cadastrado", Toast.LENGTH_LONG).show()
+                viewmodelCadastroCliente.customerId.observe(viewLifecycleOwner, Observer {
+                    Toast.makeText(requireContext(), "id do cliente: $id", Toast.LENGTH_LONG).show()
+                    //findNavController().navigate(CadastroClienteFragmentDirections.actionCadastroClienteFragmentToCadastraCarroFragment(it))
+                })
+
             }else{
                 Toast.makeText(requireContext(), "Erro ao cadastrar o cliente", Toast.LENGTH_LONG).show()
             }

@@ -1,5 +1,6 @@
 package com.example.washcar.cadastrarClienteFragment
 
+import android.util.Log
 import androidx.lifecycle.*
 import com.example.washcar.api.customer.model.CustomerRequest
 import com.example.washcar.api.customer.model.CustomerResponse
@@ -16,6 +17,16 @@ class CadastroClienteFragmentViewModel(remoteRepository: RemoteRepository) : Vie
     private var _customerRequest = MutableLiveData<CustomerRequest>()
     val customerRequest : LiveData<CustomerRequest>
     get() = _customerRequest
+
+    private var _customerResponse = MutableLiveData<Response<CustomerResponse>>()
+    val customerResponse : LiveData<Response<CustomerResponse>>
+        get() = _customerResponse
+
+    private var _customerId = MutableLiveData<Int>()
+    val customerId : LiveData<Int>
+        get() = _customerId
+
+
 
     private var _createCustomerStatus = MutableLiveData<Boolean>()
     val createCustomerStatus : LiveData<Boolean>
@@ -41,6 +52,11 @@ class CadastroClienteFragmentViewModel(remoteRepository: RemoteRepository) : Vie
                 ) {
                     if (response.code() == 201){
                         _createCustomerStatus.postValue(true)
+                        val id = response.body()!!.id
+                        Log.i("responseCliente", "api ${response.body()!!.id}")
+                        _customerId.postValue(id)
+                        Log.i("responseCliente", "viewModel ${customerId.value}")
+
                     }else{
                         _createCustomerStatus.postValue(false)
                     }

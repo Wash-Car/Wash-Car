@@ -10,4 +10,7 @@ data class CarModelResponse(
     @SerializedName("manufacturerId")
     var manufacturerId : Int
 ) {
+    override fun toString(): String {
+        return carModel
+    }
 }

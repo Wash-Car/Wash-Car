@@ -15,6 +15,7 @@ import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.navArgs
 import com.example.washcar.R
 import com.example.washcar.api.carModel.model.CarModelResponse
 import com.example.washcar.databinding.FragmentCadastraCarroBinding
@@ -25,6 +26,8 @@ class CadastraCarroFragment : Fragment() {
     lateinit var binding: FragmentCadastraCarroBinding
     lateinit var viewModel: CadastraCarroViewModel
     lateinit var autoCompleteAdapter: AutoCompleteAdapter
+
+    val args: CadastraCarroFragmentArgs by navArgs()
 
 
     override fun onCreateView(
@@ -48,6 +51,10 @@ class CadastraCarroFragment : Fragment() {
         viewModel.getAllCarModel(accessToken)
         viewModel.getAllManufacturer(accessToken)
 
+
+        Toast.makeText(
+            requireContext(), "${args.idCliente}", Toast.LENGTH_LONG
+        ).show()
 
 
 

@@ -4,7 +4,7 @@ import com.google.gson.annotations.SerializedName
 
 data class CustomerResponse(
      @SerializedName("id")
-     var id : String,
+     var id : Int,
      @SerializedName("nomeCompleto")
      var completeName : String,
      @SerializedName("email")
