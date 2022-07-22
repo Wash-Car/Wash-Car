@@ -1,4 +1,6 @@
 package com.example.washcar.api.carModel.model
 
-class CarModelRequest {
+import com.google.gson.annotations.SerializedName
+
+class CarModelRequest{
 }

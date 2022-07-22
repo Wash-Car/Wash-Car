@@ -68,8 +68,8 @@ class CadastroClienteFragment : Fragment() {
 
                 Toast.makeText(requireContext(), "Cliente Cadastrado", Toast.LENGTH_LONG).show()
                 viewmodelCadastroCliente.customerId.observe(viewLifecycleOwner, Observer {
-                    Toast.makeText(requireContext(), "id do cliente: $id", Toast.LENGTH_LONG).show()
-                    //findNavController().navigate(CadastroClienteFragmentDirections.actionCadastroClienteFragmentToCadastraCarroFragment(it))
+                    Toast.makeText(requireContext(), "id do cliente: $it", Toast.LENGTH_LONG).show()
+                    findNavController().navigate(CadastroClienteFragmentDirections.actionCadastroClienteFragmentToCadastraCarroFragment(it))
                 })
 
             }else{

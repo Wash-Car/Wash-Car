@@ -44,7 +44,7 @@ class CadastroClienteFragmentViewModel(remoteRepository: RemoteRepository) : Vie
 
     fun createCustomer(customerRequest: CustomerRequest?, authorization: String?) {
         viewModelScope.launch {
-            var request = remoteRepository.createCustomer(customerRequest, authorization)
+            val request = remoteRepository.createCustomer(customerRequest, authorization)
             request.enqueue(object : Callback<CustomerResponse> {
                 override fun onResponse(
                     call: Call<CustomerResponse>,
@@ -54,7 +54,8 @@ class CadastroClienteFragmentViewModel(remoteRepository: RemoteRepository) : Vie
                         _createCustomerStatus.postValue(true)
                         val id = response.body()!!.id
                         Log.i("responseCliente", "api ${response.body()!!.id}")
-                        _customerId.postValue(id)
+                        _customerId.value = id
+
                         Log.i("responseCliente", "viewModel ${customerId.value}")
 
                     }else{

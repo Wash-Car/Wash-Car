@@ -44,6 +44,7 @@
             android:layout_marginTop="16dp"
             android:layout_marginEnd="8dp"
             android:hint="Ano fabricação"
+            android:text="@={viewModel.carRequest.anoFabricacao}"
             app:layout_constraintEnd_toStartOf="@+id/textFieldAnoModelo"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textFieldMarca">
@@ -63,6 +64,7 @@
             android:layout_marginTop="16dp"
             android:layout_marginEnd="16dp"
             android:hint="Ano modelo"
+            android:text="@={viewModel.carRequest.anoModelo}"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/textFieldAnoFabricacao"
             app:layout_constraintTop_toBottomOf="@+id/textFieldMarca">
